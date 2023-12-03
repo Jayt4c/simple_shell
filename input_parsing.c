@@ -14,4 +14,5 @@ void get_input(char *command, size_t size)
 		printout("error due to end-of-file\n");
 		exit(EXIT_FAILURE);
 	}
+	command[strcspn(command, "\n")] = '\0';
 }

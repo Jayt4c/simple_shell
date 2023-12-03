@@ -9,4 +9,5 @@
 void display_prompt(void)
 {
 	printout("ja_shell$ ");
+	fflush(stdout);
 }

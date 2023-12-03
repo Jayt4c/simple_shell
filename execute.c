@@ -13,12 +13,6 @@ void execute_promptcommand(const char *command)
 	size_t command_length = strlen(command) + 1;
 	pid_t child_pid = fork();
 	
-	if (strlen(command) == 0)
-	{
-		
-		return;
-	}
-	
 	args = malloc(2 * sizeof(char *));
 	if (args == NULL)
 	{
