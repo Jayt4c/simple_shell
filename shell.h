@@ -12,5 +12,6 @@ void printout(const char *string);
 void display_prompt(void);
 void get_input(char *command, size_t size);
 void execute_promptcommand(const char *command);
+void execute_child_process(char **args, const char *command);
 
 #endif
