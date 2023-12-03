@@ -5,7 +5,7 @@
  * @command: the strings command in a buffer
  * @size: size of command
  *
- **/i
+ **/
 
 void get_input(char *command, size_t size)
 {

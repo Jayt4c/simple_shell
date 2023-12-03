@@ -12,6 +12,30 @@ void execute_promptcommand(const char *command)
 	char **args;
 	size_t command_length = strlen(command) + 1;
 	pid_t child_pid = fork();
+	
+	if (strlen(command) == 0)
+	{
+		
+		return;
+	}
+	
+	args = malloc(2 * sizeof(char *));
+	if (args == NULL)
+	{
+		perror("malloc failed");
+		exit(EXIT_FAILURE);
+	}
+
+	args[0] = malloc(command_length);
+	if (args[0] == NULL)
+	{
+		perror("malloc failed");
+		free(args);
+		exit(EXIT_FAILURE);
+	}
+	strcpy(args[0], command);
+
+	args[1] = NULL;
 
 	switch (child_pid)
 	{
@@ -20,33 +44,24 @@ void execute_promptcommand(const char *command)
 			exit(EXIT_FAILURE);
 
 		case 0:
-			;
-			args = malloc(2 * sizeof(char *));
-			args[0] = (char *)command;
-			args[1] = NULL;
-
-			if (args == NULL)
+			if (execve(command, args, NULL) == -1)
 			{
-				perror("malloc failed");
-				exit(EXIT_FAILURE);
-			}
-
-			if (strncpy(args[0], command, command_length) != 0)
-			{
+				if (errno == ENOENT)
+				{
+					printout("directory not found.\n");
+				} else {
+					perror("child process execve failed");
+				}
+				free(args[0]);
 				free(args);
 				exit(EXIT_FAILURE);
 			}
-
-			args[1] = NULL;
-
-			if (execve(command, args, NULL) == -1)
-			{
-				perror("child process execve failed");
-				exit(EXIT_FAILURE);
-			}
+			break;
 
 		default:
 			wait(NULL);
+			free(args[0]);
+			free(args);
 
 	}
 }
