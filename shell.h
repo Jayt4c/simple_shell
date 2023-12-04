@@ -11,6 +11,8 @@
 void printout(const char *string);
 void display_prompt(void);
 void get_input(char *command, size_t size);
+void tokenize(const char *command, char **args);
+void free_args(char **args);
 void execute_promptcommand(const char *command);
 void execute_child_process(char **args, const char *command);
 

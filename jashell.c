@@ -7,7 +7,7 @@
 
 int main(void)
 {
-	char command[101];
+	char command[1024];
 
 	for (;;)
 	{
