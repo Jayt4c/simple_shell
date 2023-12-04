@@ -13,7 +13,12 @@ int main(void)
 	{
 		display_prompt();
 		get_input(command, sizeof(command));
-		command[strcspn(command, "\n")] = '\0';
+		if (strlen(command) == 0)
+		{
+			continue;
+		}
 		execute_promptcommand(command);
 	}
+
+	return (0);
 }

@@ -16,5 +16,6 @@ void get_input(char *command, size_t size);
 void execute_promptcommand(const char *command);
 void path_handler(char *directory);
 char *_strtok(char *s, char *del);
+void execute_child_process(char **args, const char *command);
 
 #endif
