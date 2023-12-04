@@ -8,29 +8,51 @@
  * Return: void 
 */
 
-void path_handler(char *directory)
+char *_get_env(char *_env)
 {
-    DIR *d;
-	struct dirent *entry;
-	char *dPath = directory;
+	extern char **environ;
+	int x;
+	char *s;
 
-	d = opendir(dPath);
-	if (d == NULL)
+	x = 0;
+
+	for (x = 0; environ[x]; x++)
 	{
-		perror("opendir");
-		exit(1);
+		s = strtok(environ[x], "=");
+		if (strcmp(_env, s) == 0)
+			return (strtok (NULL, "\n"));
+		x++;
 	}
+	return (NULL);
+}
 
-	while ((entry = readdir(d)) != NULL)
-	{
-		printf("%s\n", entry->d_name);
-	}
+void path_handler(__attribute__((unused)) char *directory)
+{
+    extern char **environ;
 
-	if (entry == NULL)
-	{
-		perror("readdir");
-		exit(1);
-	}
+    printf("%s", environ[1]);
 
-	closedir(d);
+    // DIR *d;
+	// struct dirent *entry;
+	// char *dPath = directory;
+
+	// d = opendir(dPath);
+	// if (d == NULL)
+	// {
+	// 	perror("opendir");
+	// 	exit(1);
+	// }
+
+	// while ((entry = readdir(d)) != NULL)
+	// {
+	// 	printf("%s\n", entry->d_name);
+	// }
+
+	// if (entry == NULL)
+	// {
+	// 	perror("readdir");
+	// 	exit(1);
+	// }
+
+	// closedir(d);
 }
