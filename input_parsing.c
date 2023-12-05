@@ -11,7 +11,7 @@ void get_input(char *command, size_t size)
 {
 	if (fgets(command, size, stdin) == NULL)
 	{
-		printout("error due to end-of-file\n");
+		printout("exit due to end-of-file\n");
 		exit(EXIT_FAILURE);
 	}
 	command[strcspn(command, "\n")] = '\0';

@@ -5,6 +5,7 @@
  *
  * @args: pointer to a pointer that holds arguments
  * @command: command entered
+void free_args(char **args, int count);
  *
  **/
 
