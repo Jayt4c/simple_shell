@@ -7,6 +7,8 @@
  *
  **/
 
+char command[1024];
+
 void get_input(char *command, size_t size)
 {
 	if (fgets(command, size, stdin) == NULL)
@@ -15,4 +17,9 @@ void get_input(char *command, size_t size)
 		exit(EXIT_FAILURE);
 	}
 	command[strcspn(command, "\n")] = '\0';
+}
+
+void non_interactive_mode(const char *filename)
+{
+	execute_file(filename);
 }

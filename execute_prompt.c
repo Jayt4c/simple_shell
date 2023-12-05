@@ -39,6 +39,7 @@ void execute_promptcommand(const char *command)
 
 		case 0:
 			execute_child_process(args, command);
+
 			break;
 
 		default:
@@ -47,4 +48,5 @@ void execute_promptcommand(const char *command)
 			free(args);
 
 	}
+
 }
