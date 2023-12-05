@@ -2,11 +2,13 @@
 
 /**
 * _get_env - Gets the environment variable
-* 
+*
 * @env: Environment variable will be returned
-* 
+*
+* Return: The value of an environment variable
 */
-char *_get_env(char *_env)
+
+char* _get_env(char* _env)
 {
 	extern char** environ;
 	int x;
@@ -15,10 +17,10 @@ char *_get_env(char *_env)
 
 	for (x = 0; environ[x]; x++)
 	{
-		char *s = strtok(environ[x], "=");
+		char* s = strtok(environ[x], "=");
 		if (s != NULL && strcmp(_env, s) == 0)
 		{
-			char *path = strtok(NULL, "\n");
+			char* path = strtok(NULL, "\n");
 			if (path != NULL)
 			{
 				return (path);
@@ -33,30 +35,42 @@ char *_get_env(char *_env)
 
 /**
  * path_handler - checks whether the cmd path is existed or not
- * 
+ *
  * @cmd: The command that user entered
- * 
- * Return: void 
+ *
+ * Return: void
 */
 
-int path_handler(char *cmd)
+int path_handler(char* cmd)
 {
-    char *path, *cmd_path, ch;
-	int x;
+	extern char** environ;
+	char* path, *cmd_path, *tmp, *freer, ch;
+	int x, len;
 
-	path = malloc((strlen(_get_env("PATH"))));
+	x = 0;
 
+	tmp = _get_env("PATH");
+	
+	if (!tmp)
+		return (0);
+	
+	path = malloc(strlen(tmp) + 1);
+	
 	if (!path)
 		return (0);
 
-	strcpy(path, (_get_env("PATH")));
-	for (x = 0; path; x++)
+
+	strcpy(path, (tmp));
+	len = strlen(path);
+	freer = path;
+
+	for (; x < len; x++)
 	{
 		if (path[x] == '\0' || path[x] == ':')
 		{
 			ch = path[x];
 			path[x] = '\0';
-			cmd_path = malloc(strlen(path) + (x + 2));
+			cmd_path = malloc(strlen(cmd) + (x + 2));
 			if (!cmd_path)
 				return (0);
 			strcpy(cmd_path, path);
@@ -65,18 +79,22 @@ int path_handler(char *cmd)
 			if (!access(cmd_path, X_OK))
 			{
 				execute_promptcommand(cmd_path);
+				path = freer;
 				free(path);
 				free(cmd_path);
 				return (1);
 			}
 			else
 			{
+				free(cmd_path);
 				if (ch)
 					path += (x + 1);
-				free(cmd_path);
+				len -= x;
+				x = 0;
 			}
 		}
 	}
+	path = freer;
 	free(path);
 	return (0);
 }

@@ -7,7 +7,7 @@
 
 int main(void)
 {
-	char command[1024];
+	char command[101];
 
 	for (;;)
 	{
@@ -17,7 +17,7 @@ int main(void)
 		{
 			continue;
 		}
-		execute_promptcommand(command);
+		path_handler(command);
 	}
 
 	return (0);

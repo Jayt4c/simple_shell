@@ -1,9 +1,13 @@
 #include "shell.h"
 
 /**
+ * _strtok - Gets the string right before a delimeter
+ * 
+ * @s: Full string to be checked
  *
- *
- *
+ * @del: the delimeter
+ * 
+ * Return: The string right before a delimeter
  */
 
 char *_strtok(char *s, char *del)
@@ -29,5 +33,5 @@ char *_strtok(char *s, char *del)
 	else
 		rem = NULL;
 
-	return tok;
+	return (tok);
 }
