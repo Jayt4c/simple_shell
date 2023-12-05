@@ -5,19 +5,24 @@
  * Return: infinite loop
  **/
 
-int main(void)
+const char *filename;
+int main(int argc, char *argv[])
 {
-	char command[1024];
-
-	for (;;)
+	if (argc == 2)
 	{
-		display_prompt();
-		get_input(command, sizeof(command));
-		if (strlen(command) == 0)
-		{
-			continue;
-		}
-		execute_promptcommand(command);
+		filename =  argv[1];
+		interactive_mode();
+	}
+	else if(argc == 1)
+	{
+		non_interactive_mode(filename);
+	}
+	else
+	{
+		printout("usage:");
+		printout(argv[0]);
+		printout("[script_file]\n");
+		exit(EXIT_FAILURE);
 	}
 
 	return (0);

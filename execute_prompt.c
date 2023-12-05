@@ -41,10 +41,15 @@ void execute_promptcommand(const char *command)
 
 		case 0:
 			execute_child_process(args, command);
+
 			break;
 
 		default:
 			wait(NULL);
 			free_args(args);
 	}
+
+	printout("Exiting command: ");
+	printout(command);
+	printout("\n");
 }
