@@ -14,7 +14,7 @@ void printout(const char *string);
 void display_prompt(void);
 void get_input(char *command, size_t size);
 void execute_promptcommand(const char *command);
-void path_handler(char *directory);
+int path_handler(char *cmd);
 char *_strtok(char *s, char *del);
 void execute_child_process(char **args, const char *command);
 
