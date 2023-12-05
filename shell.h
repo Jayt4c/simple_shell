@@ -20,7 +20,7 @@ void get_input(char *command, size_t size);
 void tokenize(const char *command, char **args);
 void free_args(char **args);
 void execute_promptcommand(const char *command);
-void path_handler(char *directory);
+int path_handler(char *cmd);
 char *_strtok(char *s, char *del);
 void execute_child_process(char **args, const char *command);
 

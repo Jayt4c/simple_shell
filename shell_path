@@ -1,12 +1,5 @@
 #include "shell.h"
 
-/**
- * path_handler - Handles the path that is passed to it
- * 
- * @directory: The path will be handled
- * 
- * Return: void 
-*/
 
 char *_get_env(char *_env)
 {
@@ -26,33 +19,52 @@ char *_get_env(char *_env)
 	return (NULL);
 }
 
-void path_handler(__attribute__((unused)) char *directory)
+/**
+ * path_handler - checks whether the cmd path is existed or not
+ * 
+ * @cmd: The command that user entered
+ * 
+ * Return: void 
+*/
+
+int path_handler(char *cmd)
 {
-    extern char **environ;
+    char *path, *cmd_path, ch;
+	int x;
 
-    printf("%s", environ[1]);
+	path = malloc((strlen(_get_env("PATH")) + 5));
 
-    // DIR *d;
-	// struct dirent *entry;
-	// char *dPath = directory;
+	if (!path)
+		return (0);
 
-	// d = opendir(dPath);
-	// if (d == NULL)
-	// {
-	// 	perror("opendir");
-	// 	exit(1);
-	// }
-
-	// while ((entry = readdir(d)) != NULL)
-	// {
-	// 	printf("%s\n", entry->d_name);
-	// }
-
-	// if (entry == NULL)
-	// {
-	// 	perror("readdir");
-	// 	exit(1);
-	// }
-
-	// closedir(d);
+	strcpy(path, (_get_env("PATH") + 5));
+	for (x = 0; path; x++)
+	{
+		if (path[x] == '\0' || path[x] == ':')
+		{
+			ch = path[x];
+			path[x] = '\0';
+			cmd_path = malloc(strlen(path) + (x + 2));
+			if (!cmd_path)
+				return (0);
+			strcpy(cmd_path, path);
+			strcat(cmd_path, "/");
+			strcat(cmd_path, cmd);
+			if (!access(cmd_path, X_OK))
+			{
+				execute_promptcommand(cmd_path);
+				free(path);
+				free(cmd_path);
+				return (1);
+			}
+			else
+			{
+				if (ch)
+					path += (x + 1);
+				free(cmd_path);
+			}
+		}
+	}
+	free(path);
+	return (0);
 }
