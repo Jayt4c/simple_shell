@@ -17,11 +17,11 @@ char* _get_env(char* _env)
 
 	for (x = 0; environ[x]; x++)
 	{
-		char* s = strtok(environ[x], "=");
+		char* s = _strtok(environ[x], "=");
 		if (s != NULL && strcmp(_env, s) == 0)
 		{
-			char* path = strtok(NULL, "\n");
-			if (path != NULL)
+			char* path = _strtok(NULL, "\n");
+			if (path)
 			{
 				return (path);
 			}
@@ -44,27 +44,24 @@ char* _get_env(char* _env)
 int path_handler(char* cmd)
 {
 	extern char** environ;
-	char* path, *cmd_path, *tmp, *freer, ch;
+	char *path, *cmd_path, *freer, ch;
+	char* tmp;
 	int x, len;
 
-	x = 0;
-
 	tmp = _get_env("PATH");
-	
+
 	if (!tmp)
 		return (0);
-	
+
 	path = malloc(strlen(tmp) + 1);
-	
+
 	if (!path)
 		return (0);
-
 
 	strcpy(path, (tmp));
 	len = strlen(path);
 	freer = path;
-
-	for (; x < len; x++)
+	for (x = 0; x < len; x++)
 	{
 		if (path[x] == '\0' || path[x] == ':')
 		{

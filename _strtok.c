@@ -10,28 +10,41 @@
  * Return: The string right before a delimeter
  */
 
-char *_strtok(char *s, char *del)
+char *_strtok(char* s, const char* del)
 {
-	static char *rem;
-	char *tok;
-	char *delim;
-	
-	rem = NULL;
+    static char* rem;
+    char* tok;
+    char* delim;
 
-	if (s)
-	{
-		rem = s;
-	}
-	tok = rem;
-	delim = strchr(rem, *del);
+    if (s != NULL)
+        rem = s;
 
-	if (delim)
-	{
-		*delim = '\0';
-		rem = delim + 1;
-	}
-	else
-		rem = NULL;
+    tok = rem;
 
-	return (tok);
+    if (rem == NULL || *rem == '\0')
+    {
+        rem = NULL;
+        return NULL;
+    }
+
+    delim = strpbrk(rem, del);
+
+    if (delim != NULL)
+    {
+        size_t len = delim - rem;
+        tok = malloc(len + 1);
+
+        if (tok != NULL)
+        {
+            strncpy(tok, rem, len);
+            tok[len] = '\0';
+            rem = delim + 1;
+        }
+        else
+            rem = NULL;
+    }
+    else
+        rem = NULL;
+
+    return (tok);
 }
