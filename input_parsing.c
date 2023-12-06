@@ -7,7 +7,6 @@
  *
  **/
 
-char command[1024];
 
 void get_input(char *command, size_t size)
 {

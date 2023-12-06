@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "//wsl.localhost/Ubuntu-20.04/home/makarona/simple_shell",
-      "program": "//wsl.localhost/Ubuntu-20.04/home/makarona/simple_shell/build/Debug/outDebug",
+      "cwd": "//wsl.localhost/Ubuntu-20.04/home/makarona/simple_test",
+      "program": "//wsl.localhost/Ubuntu-20.04/home/makarona/simple_test/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
