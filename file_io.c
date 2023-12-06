@@ -6,14 +6,13 @@
  *
  **/
 
+int file_descriptor;
+char *line = NULL;
+size_t line_size = 0;
+ssize_t line_length; int file_decriptor;
 
-void execute_file(const char* filename)
+void execute_file(const char *filename)
 {
-	int file_descriptor;
-	char* line = NULL;
-	size_t line_size = 0;
-	ssize_t line_length;
-
 	file_descriptor = open(filename, O_RDONLY);
 
 	if (file_descriptor == -1)
@@ -22,7 +21,7 @@ void execute_file(const char* filename)
 		return;
 	}
 
-	while ((line_length = getline(&line, &line_size, fdopen(file_descriptor, "r"))) != -1)
+	while((line_length = getline(&line, &line_size, fdopen(file_descriptor, "r"))) != -1)
 	{
 		line[line_length - 1] = '\0';
 		execute_promptcommand(line);

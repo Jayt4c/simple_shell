@@ -10,11 +10,7 @@
  * Return: The string right before a delimeter
  */
 
-<<<<<<< HEAD
 char *_strtok(char* s, const char* del)
-=======
-char* _strtok(char* s, const char* del)
->>>>>>> cd36a457e21ed586b580e8577b90af23efeaf620
 {
     static char* rem;
     char* tok;

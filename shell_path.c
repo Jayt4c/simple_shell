@@ -44,11 +44,7 @@ char* _get_env(char* _env)
 int path_handler(char* cmd)
 {
 	extern char** environ;
-<<<<<<< HEAD
 	char *path, *cmd_path, *freer, ch;
-=======
-	char* path, *cmd_path, *freer, ch;
->>>>>>> cd36a457e21ed586b580e8577b90af23efeaf620
 	char* tmp;
 	int x, len;
 

@@ -20,12 +20,7 @@ void get_input(char *command, size_t size);
 void execute_promptcommand(const char *command);
 char *_get_env(char* _env);
 int path_handler(char *cmd);
-<<<<<<< HEAD
 char *_strtok(char* s, const char* del);
-=======
-char* _strtok(char* s, const char* del);
->>>>>>> cd36a457e21ed586b580e8577b90af23efeaf620
 void execute_child_process(char **args, const char *command);
-char* _get_env(char* _env);
 
 #endif
