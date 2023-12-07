@@ -22,5 +22,7 @@ char *_get_env(char* _env);
 int path_handler(char *cmd);
 char *_strtok(char* s, const char* del);
 void execute_child_process(char **args, const char *command);
+int _setenv(char* _env, char* value);
+char* envname(char* str)
 
 #endif
