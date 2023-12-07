@@ -1,25 +1,55 @@
 #include "shell.h"
 
-/***/
+/**
+ * envname - Gets the name an environment variable
+ * 
+ * @str: the variable its name will be extracted
+ *
+ * Return: Environment variable name*/
 
 
-int _setenv(char* env, char* value)
+char* envname(char* str)
 {
-	int x = 0, len;
+	char* ret;
+	int x;
 
-	if (!env)
+	for (x = 0; str[x] != '='; x++)
+		ret[x] = str[x];
+
+	ret[x] = '\0';
+
+	return (ret);
+}
+
+int _setenv(char* _env, char* value)
+{
+	extern char** environ;
+	char* tmp, * new;
+	int x = 0, idx;
+
+	if (_env == NULL)
 		return (-1);
 
-	while (*environ)
+	idx = strlen(_env) + 1;
+
+	new = malloc(idx + 1 + strlen(value));
+	while (*environ != NULL)
 	{
-		if (strcmp(*environ, env) == 0)
+		tmp = malloc(strlen(envname(*environ)) + 1);
+		if (!tmp)
+			return (-1);
+		strcpy(tmp, envname(*environ));
+		if (strcmp(tmp, _env) == 0)
 		{
-			idx = strlen(env) + 1;
-			for (; value[x]; x++, idx++)
-				*environ[idx] = value[x];
-			*environ[idx] = '\0';
-			break;
+			strcpy(new, _env);
+			strcat(new, "=");
+			strcat(new, value);
+			*environ = new;
+			free(tmp);
+			printf("%s\n", *environ);
+			return (0);
 		}
 		environ++;
 	}
+	return (-1);
 }
