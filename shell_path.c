@@ -93,6 +93,7 @@ int path_handler(char* cmd)
 			}
 		}
 	}
+	printf("command \"%s\" not found\n", _strtok(cmd, " "));
 	path = freer;
 	free(path);
 	return (0);
