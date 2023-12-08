@@ -10,18 +10,30 @@ void free_args(char **args, int count);
  **/
 void execute_child_process(char **args, const char *command)
 {
-	if (execve(command, args, NULL) == -1)
+	int i;
+
+	if (strcmp(args[0], "echo") == 0)
 	{
-		if (errno = ENOENT)
+		for (i = 1; args[i] != NULL; i++)
 		{
-			printout("Exiting command: ");
-			printout(command);
-			printout("\n");
+			printout(args[i]);
 		}
-		else 
+		printout("\n");
+	} else
+	{
+		if (execve(command, args, NULL) == -1)
 		{
-			perror("child process failed");
+			if (errno = ENOENT)
+			{
+				printout("No such files or directory found\n");
+				printout("Exiting command: ");
+				printout(command);
+				printout("\n");
+			} else
+			{
+				perror("child process failed");
 			exit(EXIT_FAILURE);
+			}
 		}
 	}
 }
