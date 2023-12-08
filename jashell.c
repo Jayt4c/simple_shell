@@ -23,7 +23,7 @@ int main(void)
 			printout("Exiting shell...\n");
 			break;
 		}
-		execute_promptcommand(command);
+		/*execute_promptcommand(command);*/
 	}
 
 	return (0);

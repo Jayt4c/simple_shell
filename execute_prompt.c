@@ -13,7 +13,7 @@ void execute_promptcommand(const char *command)
 	int input_fd = STDIN_FILENO; 
 	int output_fd = STDOUT_FILENO;
 	size_t command_length = strlen(command) + 1;
-	pid_t child_pid = fork();
+	pid_t child_pid;
 
 	args = malloc(2 * sizeof(char *));
 	if (args == NULL)
@@ -33,6 +33,7 @@ void execute_promptcommand(const char *command)
 
 	args[1] = NULL;
 
+	child_pid = fork();
 	switch (child_pid)
 	{
 		case -1:
@@ -48,7 +49,7 @@ void execute_promptcommand(const char *command)
 			wait(NULL);
 			free(args[0]);
 			free(args);
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
 
 	}
 
