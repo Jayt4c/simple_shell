@@ -9,9 +9,9 @@
 */
 
 
-char* envname(char* str)
+char *envname(char *str)
 {
-	char *ret;
+	char *ret = NULL;
 	int x;
 
 	for (x = 0; str[x] != '='; x++)
