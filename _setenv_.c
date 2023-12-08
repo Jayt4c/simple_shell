@@ -5,12 +5,13 @@
  * 
  * @str: the variable its name will be extracted
  *
- * Return: Environment variable name*/
+ * Return: Environment variable name
+*/
 
 
 char* envname(char* str)
 {
-	char* ret;
+	char *ret;
 	int x;
 
 	for (x = 0; str[x] != '='; x++)
@@ -21,35 +22,52 @@ char* envname(char* str)
 	return (ret);
 }
 
-int _setenv(char* _env, char* value)
-{
-	extern char** environ;
-	char* tmp, * new;
-	int x = 0, idx;
+/**
+ * _setenv - Sets environment variable to a specific value
+ *
+ * @_env: the name of an environment variable
+ *
+ * @value: the value of an environment variable
+ *
+ * Return: 0 if succeed, -1 if failed
+*/
 
-	if (_env == NULL)
+int _setenv(char *_env, char *value)
+{
+	extern char **environ;
+	int new_len;
+	char *updt, **tmp;
+
+	if (_env == NULL || value == NULL)
 		return (-1);
 
-	idx = strlen(_env) + 1;
+	new_len = strlen(_env) + strlen(value) + 2;
+	tmp = environ;
 
-	new = malloc(idx + 1 + strlen(value));
-	while (*environ != NULL)
+	while (*environ)
 	{
-		tmp = malloc(strlen(envname(*environ)) + 1);
-		if (!tmp)
-			return (-1);
-		strcpy(tmp, envname(*environ));
-		if (strcmp(tmp, _env) == 0)
+		if (!strncmp(*environ, _env, strlen(_env)))
 		{
-			strcpy(new, _env);
-			strcat(new, "=");
-			strcat(new, value);
-			*environ = new;
-			free(tmp);
-			printf("%s\n", *environ);
+			updt = malloc(new_len);
+			if (!updt)
+				return (-1);
+			strcpy(updt, _env);
+			strcat(updt, "=");
+			strcat(updt, value);
+			strcpy(*environ, updt);
+			environ = tmp;
+			free(updt);
 			return (0);
 		}
 		environ++;
 	}
-	return (-1);
+	*environ = malloc(new_len);
+	if (!*environ)
+		return (-1);
+	strcpy(*environ, _env);
+	strcat(*environ, "=");
+	strcat(*environ, value);
+	environ = tmp;
+
+	return (0);
 }
