@@ -17,6 +17,7 @@ void interactive_mode(void);
 void printout(const char *string);
 void display_prompt(void);
 void get_input(char *command, size_t size);
+void tokenize(const char *command, char **args);
 void execute_promptcommand(const char *command);
 char *_get_env(char* _env);
 int path_handler(char *cmd);

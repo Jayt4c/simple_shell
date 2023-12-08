@@ -38,6 +38,7 @@ void execute_promptcommand(const char *command)
 			exit(EXIT_FAILURE);
 
 		case 0:
+			tokenize(command, args);
 			execute_child_process(args, command);
 
 			break;
