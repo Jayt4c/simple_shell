@@ -17,7 +17,7 @@ int main(void)
 		{
 			continue;
 		}
-		/*path_handler(command);*/
+		path_handler(command);
 		if (strcmp(command, "exit") == 0)
 		{
 			printout("Exiting shell...\n");

@@ -10,6 +10,8 @@
 void execute_promptcommand(const char *command)
 {
 	char **args;
+	int input_fd = STDIN_FILENO; 
+	int output_fd = STDOUT_FILENO;
 	size_t command_length = strlen(command) + 1;
 	pid_t child_pid = fork();
 
@@ -39,8 +41,7 @@ void execute_promptcommand(const char *command)
 
 		case 0:
 			tokenize(command, args);
-			execute_child_process(args, command);
-
+			execute_child_process(args, command, input_fd, output_fd);
 			break;
 
 		default:

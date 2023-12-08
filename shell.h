@@ -19,10 +19,12 @@ void display_prompt(void);
 void get_input(char *command, size_t size);
 void tokenize(const char *command, char **args);
 void execute_promptcommand(const char *command);
+void execute_pipe_commands(char **commands, int num_commands);
 char *_get_env(char* _env);
 int path_handler(char *cmd);
 char *_strtok(char* s, const char* del);
-void execute_child_process(char **args, const char *command);
+/*void execute_child_process(char **args, const char *command);*/
+void execute_child_process(char **args, const char *command, int input_fd, int output_fd);
 int _setenv(char* _env, char* value);
 char* envname(char* str);
 
