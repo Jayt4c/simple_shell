@@ -7,7 +7,7 @@
 
 int main(void)
 {
-	char command[101];
+	char command[1024];
 
 	for (;;)
 	{
@@ -17,12 +17,13 @@ int main(void)
 		{
 			continue;
 		}
-		path_handler(command);
+		/*path_handler(command);*/
 		if (strcmp(command, "exit") == 0)
 		{
 			printout("Exiting shell...\n");
 			break;
 		}
+		execute_promptcommand(command);
 	}
 
 	return (0);

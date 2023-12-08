@@ -10,28 +10,30 @@ void free_args(char **args, int count);
  **/
 void execute_child_process(char **args, const char *command)
 {
+	int i;
 
-    /*if (strcmp(command, "/bin/ls") == 0) {
-        if (execve("/bin/ls", args, NULL) == -1) {
-            perror("execve failed");
-            exit(EXIT_FAILURE);
-        }
-    } else {
-        printout("Exiting command: ");
-	    printout(command);
-	    printout("\n");
-        exit(EXIT_SUCCESS);
-    }*/
-	if (execve(command, args, NULL) == -1) {
-		perror("execve failed ..");
-		exit(EXIT_FAILURE);
-	}
-	else {
-		printout("Exiting command: ");
-		printout(command);
+	if (strcmp(args[0], "echo") == 0)
+	{
+		for (i = 1; args[i] != NULL; i++)
+		{
+			printout(args[i]);
+		}
 		printout("\n");
-		exit(EXIT_SUCCESS);
+	} else
+	{
+		if (execve(command, args, NULL) == -1)
+		{
+			if (errno = ENOENT)
+			{
+				printout("No such files or directory found\n");
+				printout("Exiting command: ");
+				printout(command);
+				printout("\n");
+			} else
+			{
+				perror("child process failed");
+			exit(EXIT_FAILURE);
+			}
+		}
 	}
-
 }
-
