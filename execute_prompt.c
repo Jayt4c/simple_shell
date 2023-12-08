@@ -47,6 +47,7 @@ void execute_promptcommand(const char *command)
 			wait(NULL);
 			free(args[0]);
 			free(args);
+			exit(EXIT_FAILURE);
 
 	}
 
