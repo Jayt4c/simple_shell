@@ -43,18 +43,20 @@ char* _get_env(char* _env)
 
 int path_handler(char* cmd)
 {
-	extern char** environ;
 	char *path, *cmd_path, *freer, ch;
 	char* tmp;
 	int x, len;
 
+	if (cmd[0] ==  '/')
+	{
+		execute_promptcommand(cmd);
+		return(1);
+	}
 	tmp = _get_env("PATH");
-
 	if (!tmp)
 		return (0);
 
 	path = malloc(strlen(tmp) + 1);
-
 	if (!path)
 		return (0);
 
@@ -91,6 +93,7 @@ int path_handler(char* cmd)
 			}
 		}
 	}
+	printf("Command \"%s\" not found\n", _strtok(cmd, " "));
 	path = freer;
 	free(path);
 	return (0);
