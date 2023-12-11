@@ -2,49 +2,52 @@
 
 /**
  * _strtok - Gets the string right before a delimeter
- * 
+ *
  * @s: Full string to be checked
  *
  * @del: the delimeter
- * 
+ *
  * Return: The string right before a delimeter
  */
 
-char *_strtok(char* s, const char* del)
-{
+char* _strtok(char* s, const char* del) {
     static char* rem;
-    char* tok;
-    char* delim;
+    char* tok, * p;
+    size_t len;
 
-    if (s != NULL)
+    if (s != NULL) {
         rem = s;
+    }
 
-    tok = rem;
-
-    if (rem == NULL || *rem == '\0')
-    {
-        rem = NULL;
+    if (rem == NULL || *rem == '\0') {
         return NULL;
     }
 
-    delim = strpbrk(rem, del);
+    p = strpbrk(rem, del);
 
-    if (delim != NULL)
-    {
-        size_t len = delim - rem;
+    if (p != NULL) {
+        len = p - rem;
         tok = malloc(len + 1);
 
-        if (tok != NULL)
-        {
-            strncpy(tok, rem, len);
-            tok[len] = '\0';
-            rem = delim + 1;
+        if (tok == NULL) {
+            return NULL; 
         }
-        else
-            rem = NULL;
+
+        strncpy(tok, rem, len);
+        tok[len] = '\0';
+        rem = p + 1;
     }
-    else
+    else {
+        len = strlen(rem);
+        tok = malloc(len + 1);
+
+        if (tok == NULL) {
+            return NULL; 
+        }
+
+        strcpy(tok, rem);
         rem = NULL;
+    }
 
     return (tok);
 }

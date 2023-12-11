@@ -71,3 +71,27 @@ int _setenv(char *_env, char *value)
 
 	return (0);
 }
+
+int _unsetenv (char *_env)
+{
+	extern char **environ;
+	char** iter;
+	size_t len;
+
+	if (!_env || !strlen(_env))
+		return (-1);
+
+	len = strlen(_env);
+
+	while (!*iter)
+	{
+		if (!strncmp(env, *iter, len))
+		{
+			if (*iter[len] = '=')
+			{
+
+			}
+		}
+		iter++;
+	}
+}

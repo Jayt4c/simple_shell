@@ -10,7 +10,7 @@
 void tokenize(const char *command, char **args)
 {
 	size_t i; int j;
-
+	
 	char *token = strtok((char *)command, " ");
 	i = 0;
 	while (token != NULL)

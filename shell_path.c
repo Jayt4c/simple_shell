@@ -11,16 +11,17 @@
 char* _get_env(char* _env)
 {
 	extern char** environ;
+	char* s, *path;
 	int x;
 	if (_env == NULL)
 		return (NULL);
 
 	for (x = 0; environ[x]; x++)
 	{
-		char* s = _strtok(environ[x], "=");
+		s = _strtok(environ[x], "=");
 		if (s != NULL && strcmp(_env, s) == 0)
 		{
-			char* path = _strtok(NULL, "\n");
+			path = _strtok(NULL, "\n");
 			if (path)
 			{
 				return (path);
@@ -33,6 +34,8 @@ char* _get_env(char* _env)
 }
 
 
+
+
 /**
  * path_handler - checks whether the cmd path is existed or not
  *
@@ -43,42 +46,41 @@ char* _get_env(char* _env)
 
 int path_handler(char* cmd)
 {
-	char *path, *cmd_path, *freer, ch;
-	char* tmp;
+	char* path, * cmd_path, * iter, * tmp, ch;
 	int x, len;
 
-	if (cmd[0] ==  '/')
+	if (cmd[0] == '/')
 	{
 		execute_promptcommand(cmd);
 		return(1);
 	}
+
 	tmp = _get_env("PATH");
 	if (!tmp)
 		return (0);
 
-	path = malloc(strlen(tmp) + 1);
+	path = strdup(tmp);
 	if (!path)
 		return (0);
 
-	strcpy(path, (tmp));
+
 	len = strlen(path);
-	freer = path;
+	iter = path;
 	for (x = 0; x < len; x++)
 	{
-		if (path[x] == '\0' || path[x] == ':')
+		if (iter[x] == '\0' || iter[x] == ':')
 		{
-			ch = path[x];
-			path[x] = '\0';
+			ch = iter[x];
+			iter[x] = '\0';
 			cmd_path = malloc(strlen(cmd) + (x + 2));
 			if (!cmd_path)
 				return (0);
-			strcpy(cmd_path, path);
+			strcpy(cmd_path, iter);
 			strcat(cmd_path, "/");
 			strcat(cmd_path, cmd);
 			if (!access(cmd_path, X_OK))
 			{
 				execute_promptcommand(cmd_path);
-				path = freer;
 				free(path);
 				free(cmd_path);
 				return (1);
@@ -87,15 +89,15 @@ int path_handler(char* cmd)
 			{
 				free(cmd_path);
 				if (ch)
-					path += (x + 1);
+					iter += (x + 1);
 				len -= x;
 				x = 0;
 			}
 		}
 	}
 	printf("Command \"%s\" not found\n", _strtok(cmd, " "));
-	path = freer;
 	free(path);
+	execute_promptcommand(cmd);
 	return (0);
 }
 
