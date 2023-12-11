@@ -11,7 +11,7 @@
 char* _get_env(char* _env)
 {
 	extern char** environ;
-	char* s, *path;
+	char* s, * path;
 	int x;
 	if (_env == NULL)
 		return (NULL);
@@ -46,7 +46,7 @@ char* _get_env(char* _env)
 
 int path_handler(char* cmd)
 {
-	char* path, * cmd_path, * iter, * tmp, ch;
+	char* path, * cmd_path, * iter, * tmp, ch, * args;
 	int x, len;
 
 	if (cmd[0] == '/')
@@ -54,7 +54,6 @@ int path_handler(char* cmd)
 		execute_promptcommand(cmd);
 		return(1);
 	}
-
 	tmp = _get_env("PATH");
 	if (!tmp)
 		return (0);
@@ -63,6 +62,13 @@ int path_handler(char* cmd)
 	if (!path)
 		return (0);
 
+	if (strchr(cmd, ' '))
+	{
+		args = malloc(strlen(strchr(cmd, ' ')) + 1);
+		if (!args)
+			return (0);
+		strcpy(args, strchr(cmd, ' '));
+	}
 
 	len = strlen(path);
 	iter = path;
@@ -77,9 +83,18 @@ int path_handler(char* cmd)
 				return (0);
 			strcpy(cmd_path, iter);
 			strcat(cmd_path, "/");
-			strcat(cmd_path, cmd);
+			if (strlen(args))
+				strcat(cmd_path, strtok(cmd, " "));
+			else
+				strcat(cmd_path, cmd);
+
 			if (!access(cmd_path, X_OK))
 			{
+				if (strlen(args))
+				{
+					strcat(cmd_path, args);
+					free(args);
+				}
 				execute_promptcommand(cmd_path);
 				free(path);
 				free(cmd_path);
@@ -95,7 +110,8 @@ int path_handler(char* cmd)
 			}
 		}
 	}
-	printf("Command \"%s\" not found\n", _strtok(cmd, " "));
+
+	printf("Command \"%s\" not found\n", cmd);
 	free(path);
 	execute_promptcommand(cmd);
 	return (0);

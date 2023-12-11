@@ -72,7 +72,7 @@ int _setenv(char *_env, char *value)
 	return (0);
 }
 
-int _unsetenv (char *_env)
+/*int _unsetenv(char* _env)
 {
 	extern char **environ;
 	char** iter;
@@ -83,15 +83,15 @@ int _unsetenv (char *_env)
 
 	len = strlen(_env);
 
-	while (!*iter)
+	while (!(*iter))
 	{
-		if (!strncmp(env, *iter, len))
+		if (!strncmp(_env, *iter, len))
 		{
-			if (*iter[len] = '=')
+			if ((*iter)[len] = '=')
 			{
 
 			}
 		}
 		iter++;
 	}
-}
+}*/

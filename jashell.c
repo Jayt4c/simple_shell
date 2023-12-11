@@ -17,13 +17,15 @@ int main(void)
 		{
 			continue;
 		}
-		path_handler(command);
 		if (strcmp(command, "exit") == 0)
 		{
 			printout("Exiting shell...\n");
 			break;
 		}
-		/*execute_promptcommand(command);*/
+		if ((command[0] >= 'a' && command[0] <= 'z') || (command[0] >= 'A' && command[0] <= 'Z'))
+		{
+			path_handler(command);
+		}
 	}
 
 	return (0);

@@ -5,25 +5,16 @@
  *
  * @args: pointer to a pointer that holds arguments
  * @command: command entered
- * @input_fd: input
- * @output_fd: output
 void free_args(char **args, int count);
  *
  **/
-void execute_child_process(char **args, const char *command, int input_fd, int output_fd)
+void execute_child_process(char **args, const char *command)
 {
 	int i;
 
-	if (input_fd != STDIN_FILENO)
+	if (strchr(command, '|') != NULL)
 	{
-		dup2(input_fd, STDIN_FILENO);
-		close(input_fd);
-	}
-
-	if (output_fd != STDOUT_FILENO)
-	{
-		dup2(output_fd, STDOUT_FILENO);
-		close(output_fd);
+		execute_pipe_commands(command);
 	}
 
 	if (strcmp(args[0], "echo") == 0)
@@ -33,17 +24,23 @@ void execute_child_process(char **args, const char *command, int input_fd, int o
 			printout(args[i]);
 		}
 		printout("\n");
-	} else
+	}
+	else if (strcmp(args[0], "cat") == 0)
 	{
-		if (execve(command, args, NULL) == -1)
+		cat(args[1]);
+	}
+	else
+	{
+		if (execv(command, args) == -1)
 		{
-			if (errno = ENOENT)
+			if (errno == ENOENT)
 			{
 				printout("No such files or directory found\n");
 				printout("Exiting command: ");
 				printout(command);
-				printout("\n");
-			} else
+				printout(".\n");
+			}
+			else
 			{
 				perror("child process failed");
 				exit(EXIT_FAILURE);
