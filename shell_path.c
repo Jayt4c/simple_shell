@@ -84,12 +84,13 @@ int path_handler(char* cmd)
 			strcpy(cmd_path, iter);
 			strcat(cmd_path, "/");
 			if (strlen(args))
-				strcat(cmd_path, strtok(cmd, " "));
+				strcat(cmd_path, _strtok(cmd, " "));
 			else
 				strcat(cmd_path, cmd);
 
 			if (!access(cmd_path, X_OK))
 			{
+				free(path);
 				if (ltr_check(args))
 				{
 	/*				printf("ARGS ARE %s\n", args);*/
@@ -97,7 +98,6 @@ int path_handler(char* cmd)
 					free(args);
 				}
 				execute_promptcommand(cmd_path);
-				free(path);
 				puts("-------------------------------------------------\n");
 				free(cmd_path);
 

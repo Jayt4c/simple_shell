@@ -11,7 +11,7 @@ void tokenize(const char *command, char **args)
 {
 	size_t i; int j;
 	
-	char *token = strtok((char *)command, " ");
+	char *token = _strtok((char *)command, " ");
 	i = 0;
 	while (token != NULL)
 	{
@@ -27,7 +27,7 @@ void tokenize(const char *command, char **args)
 			exit(EXIT_FAILURE);
 		}
 		strcpy(args[i], token);
-		token = strtok(NULL, " ");
+		token = _strtok(NULL, " ");
 		i++;
 	}
 	args[i] = NULL;

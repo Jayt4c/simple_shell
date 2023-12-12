@@ -20,7 +20,7 @@ void execute_promptcommand(const char *command)
 		exit(EXIT_FAILURE);
 	}
 
-	hold = strtok((char *)command, " ");
+	hold = _strtok((char *)command, " ");
 
 	for (x = 0; hold; x++)
 	{
@@ -28,7 +28,7 @@ void execute_promptcommand(const char *command)
 		if (!args[x])
 			return;
 		strcpy(args[x], hold);
-		hold = strtok(NULL, " ");
+		hold = _strtok(NULL, " ");
 	}
 	args[x] = NULL;
 

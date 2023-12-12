@@ -31,5 +31,8 @@ int _setenv(char *_env, char *value);
 char *envname(char* str);
 int ltr_check(char* s);
 char* _strdup(char* str);
+int _strlen(char* s);
+char* _strcat(char* dest, char* src);
+
 
 #endif
