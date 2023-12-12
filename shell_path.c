@@ -49,6 +49,7 @@ int path_handler(char* cmd)
 	char* path, * cmd_path, * iter, * tmp, ch, * args;
 	int x, len;
 
+	puts("checck\n");
 	if (cmd[0] == '/')
 	{
 		execute_promptcommand(cmd);
@@ -58,7 +59,7 @@ int path_handler(char* cmd)
 	if (!tmp)
 		return (0);
 
-	path = strdup(tmp);
+	path = _strdup(tmp);
 	if (!path)
 		return (0);
 
@@ -94,12 +95,13 @@ int path_handler(char* cmd)
 				{
 					printf("ARGS ARE %s\n", args);
 					strcat(cmd_path, args);
-					puts("check\n");
 					free(args);
 				}
 				execute_promptcommand(cmd_path);
 				free(path);
+				puts("-------------------------------------------------\n");
 				free(cmd_path);
+
 				return (1);
 			}
 			else

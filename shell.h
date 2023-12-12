@@ -30,5 +30,6 @@ char *_strtok(char *s, const char *del);
 int _setenv(char *_env, char *value);
 char *envname(char* str);
 int ltr_check(char* s);
+char* _strdup(char* str);
 
 #endif
