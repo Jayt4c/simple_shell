@@ -103,8 +103,9 @@ int path_handler(char* cmd)
 					free(args);
 				}
 				execute_promptcommand(cmd_path);
-				puts("-------------------------------------------------\n");
+				printout("-------------------------------------------------\n");
 				free(cmd_path);
+				free(tmp);
 
 				return (1);
 			}
