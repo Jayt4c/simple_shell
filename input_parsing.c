@@ -7,10 +7,10 @@
  *
  **/
 
-char command[1024];
-
 void get_input(char *command, size_t size)
 {
+	char command[1024];
+
 	if (fgets(command, size, stdin) == NULL)
 	{
 		printout("exit due to end-of-file\n");

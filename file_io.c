@@ -6,22 +6,23 @@
  *
  **/
 
-int file_descriptor;
-char *line = NULL;
-size_t line_size = 0;
-ssize_t line_length;
 
 void execute_file(const char *filename)
 {
-	file_descriptor = open(filename, O_RDONLY);
+	char *line = NULL;
+	size_t line_size = 0;
+	int fd;
+	ssize_t line_length;
 
-	if (file_descriptor == -1)
+	fd = open(filename, O_RDONLY);
+
+	if (fd == -1)
 	{
 		perror("Failed to open file");
 		return;
 	}
 
-	while((line_length = getline(&line, &line_size, fdopen(file_descriptor, "r"))) != -1)
+	while ((line_length = getline(&line, &line_size, fdopen(fd, "r"))) != -1)
 	{
 		if (line_length > 0 && line[line_length] - 1)
 		{
@@ -31,6 +32,6 @@ void execute_file(const char *filename)
 		execute_promptcommand(line);
 	}
 
-	close(file_descriptor);
+	close(fd);
 	free(line);
 }

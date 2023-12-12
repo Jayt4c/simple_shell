@@ -11,9 +11,6 @@ void execute_promptcommand(const char *command)
 {
 	char **args, *hold;
 	int x;
-/*	int input_fd = STDIN_FILENO; 
-	int output_fd = STDOUT_FILENO;*/
-	/*size_t command_length = strlen(command) + 1;*/
 	pid_t child_pid;
 
 	args = malloc(2 * sizeof(char *));
@@ -35,19 +32,6 @@ void execute_promptcommand(const char *command)
 	}
 	args[x] = NULL;
 
-	/*args[0] = malloc(command_length);
-	if (args[0] == NULL)
-	{
-		perror("malloc failed");
-		free(args);
-		exit(EXIT_FAILURE);
-	}
-	strcpy(args[0], command);
-
-	args[1] = NULL;*/
-
-
-
 	child_pid = fork();
 	switch (child_pid)
 	{
@@ -56,18 +40,13 @@ void execute_promptcommand(const char *command)
 			exit(EXIT_FAILURE);
 
 		case 0:
-			/*tokenize(command, args);*/
 			execv(args[0], args);
-			execute_child_process(args, args[0]/*, input_fd, output_fd*/);
-	
+			execute_child_process(args, args[0]);
 			break;
 
 		default:
 			wait(NULL);
 			free(args[0]);
 			free(args);
-			/*exit(EXIT_FAILURE);*/
-
 	}
-
 }

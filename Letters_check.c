@@ -2,9 +2,9 @@
 
 /**
  * ltr_check - checks whether the string contains letters or not
- * 
+ *
  * @s: string to be checked
- * 
+ *
  * Return: 1 if success, 0 if failed
  **/
 

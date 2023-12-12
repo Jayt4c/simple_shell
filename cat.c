@@ -1,4 +1,5 @@
 #include "shell.h"
+#define BUFFER_SIZE 1024
 
 /**
  * cat - fuction for cat
@@ -7,7 +8,6 @@
  */
 
 
-#define BUFFER_SIZE 2048
 void cat(const char *file)
 {
 	int fd, bytesRead;
