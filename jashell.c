@@ -22,7 +22,8 @@ int main(void)
 			printout("Exiting shell...\n");
 			break;
 		}
-		if ((command[0] >= 'a' && command[0] <= 'z') || (command[0] >= 'A' && command[0] <= 'Z') || command[0] == '/')
+		if ((command[0] >= 'a' && command[0] <= 'z') || (command[0] >= 'A'
+			&& command[0] <= 'Z') || command[0] == '/')
 		{
 			path_handler(command);
 		}

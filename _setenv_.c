@@ -16,7 +16,6 @@ char *envname(char *str)
 
 	for (x = 0; str[x] != '='; x++)
 		ret[x] = str[x];
-
 	ret[x] = '\0';
 
 	return (ret);
@@ -95,3 +94,4 @@ int _setenv(char *_env, char *value)
 		iter++;
 	}
 }*/
+

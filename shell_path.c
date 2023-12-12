@@ -24,11 +24,16 @@ char* _get_env(char* _env)
 			path = _strtok(NULL, "\n");
 			if (path)
 			{
+				free(s);
 				return (path);
 			}
 			else
+			{
+				free(s);
 				return (NULL);
+			}
 		}
+		free(s);
 	}
 	return (NULL);
 }
@@ -49,7 +54,6 @@ int path_handler(char* cmd)
 	char* path, * cmd_path, * iter, * tmp, ch, * args;
 	int x, len;
 
-	puts("checck\n");
 	if (cmd[0] == '/')
 	{
 		execute_promptcommand(cmd);
@@ -94,14 +98,12 @@ int path_handler(char* cmd)
 				free(path);
 				if (ltr_check(args))
 				{
-					printf("ARGS ARE %s\n", args);
 					_strcat(cmd_path, args);
 					free(args);
 				}
 				execute_promptcommand(cmd_path);
-				puts("-------------------------------------------------\n");
+				printout("-------------------------------------------------\n");
 				free(cmd_path);
-
 				return (1);
 			}
 			else
@@ -114,8 +116,7 @@ int path_handler(char* cmd)
 			}
 		}
 	}
-
-	printf("Command \"%s\" not found\n", cmd);
+	printout("Command not found\n");
 	free(path);
 	execute_promptcommand(cmd);
 	return (0);
