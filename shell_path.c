@@ -90,8 +90,9 @@ int path_handler(char* cmd)
 
 			if (!access(cmd_path, X_OK))
 			{
-				if (strlen(args))
+				if (ltr_check(args))
 				{
+					puts("check\n");
 					strcat(cmd_path, args);
 					free(args);
 				}

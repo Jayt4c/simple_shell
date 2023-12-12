@@ -29,5 +29,6 @@ int count_commands(const char *command);
 char *_strtok(char *s, const char *del);
 int _setenv(char *_env, char *value);
 char *envname(char* str);
+int ltr_check(char* s);
 
 #endif
