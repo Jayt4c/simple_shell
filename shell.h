@@ -33,6 +33,10 @@ int ltr_check(char* s);
 char* _strdup(char* str);
 int _strlen(char* s);
 char* _strcat(char* dest, char* src);
-
+int _strncmp(char* s1, char* s2, size_t x);
+char* _strcpy(char* dest, char* src);
+char* _strchr(char* s, char c);
+char* _strpbrk(char* s, char* accept);
+char* _strncpy(char* dest, char* src, int n);
 
 #endif

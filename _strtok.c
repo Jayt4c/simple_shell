@@ -23,7 +23,7 @@ char* _strtok(char* s, const char* del) {
         return NULL;
     }
 
-    p = strpbrk(rem, del);
+    p = _strpbrk(rem, (char *)del);
 
     if (p != NULL) {
         len = p - rem;
@@ -33,7 +33,7 @@ char* _strtok(char* s, const char* del) {
             return NULL; 
         }
 
-        strncpy(tok, rem, len);
+        _strncpy(tok, rem, len);
         tok[len] = '\0';
         rem = p + 1;
     }
@@ -45,7 +45,7 @@ char* _strtok(char* s, const char* del) {
             return NULL; 
         }
 
-        strcpy(tok, rem);
+        _strcpy(tok, rem);
         rem = NULL;
     }
 

@@ -63,15 +63,15 @@ int path_handler(char* cmd)
 	if (!path)
 		return (0);
 
-	if (strchr(cmd, ' '))
+	if (_strchr(cmd, ' '))
 	{
-		args = malloc(strlen(strchr(cmd, ' ')) + 1);
+		args = malloc(_strlen(_strchr(cmd, ' ')) + 1);
 		if (!args)
 			return (0);
-		strcpy(args, strchr(cmd, ' '));
+		_strcpy(args, _strchr(cmd, ' '));
 	}
 
-	len = strlen(path);
+	len = _strlen(path);
 	iter = path;
 	for (x = 0; x < len; x++)
 	{
@@ -82,12 +82,12 @@ int path_handler(char* cmd)
 			cmd_path = malloc(1024);
 			if (!cmd_path)
 				return (0);
-			strcpy(cmd_path, iter);
-			strcat(cmd_path, "/");
-			if (strlen(args))
-				strcat(cmd_path, _strtok(cmd, " "));
+			_strcpy(cmd_path, iter);
+			_strcat(cmd_path, "/");
+			if (_strlen(args))
+				_strcat(cmd_path, _strtok(cmd, " "));
 			else
-				strcat(cmd_path, cmd);
+				_strcat(cmd_path, cmd);
 
 			if (!access(cmd_path, X_OK))
 			{
@@ -95,7 +95,7 @@ int path_handler(char* cmd)
 				if (ltr_check(args))
 				{
 					printf("ARGS ARE %s\n", args);
-					strcat(cmd_path, args);
+					_strcat(cmd_path, args);
 					free(args);
 				}
 				execute_promptcommand(cmd_path);

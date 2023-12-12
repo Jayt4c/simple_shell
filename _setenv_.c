@@ -41,20 +41,20 @@ int _setenv(char *_env, char *value)
 	if (_env == NULL || value == NULL)
 		return (-1);
 
-	new_len = strlen(_env) + strlen(value) + 2;
+	new_len = _strlen(_env) + _strlen(value) + 2;
 	tmp = environ;
 
 	while (*environ)
 	{
-		if (!strncmp(*environ, _env, strlen(_env)))
+		if (!strncmp(*environ, _env, _strlen(_env)))
 		{
 			updt = malloc(new_len);
 			if (!updt)
 				return (-1);
-			strcpy(updt, _env);
-			strcat(updt, "=");
-			strcat(updt, value);
-			strcpy(*environ, updt);
+			_strcpy(updt, _env);
+			_strcat(updt, "=");
+			_strcat(updt, value);
+			_strcpy(*environ, updt);
 			environ = tmp;
 			free(updt);
 			return (0);
@@ -64,9 +64,9 @@ int _setenv(char *_env, char *value)
 	*environ = malloc(new_len);
 	if (!*environ)
 		return (-1);
-	strcpy(*environ, _env);
-	strcat(*environ, "=");
-	strcat(*environ, value);
+	_strcpy(*environ, _env);
+	_strcat(*environ, "=");
+	_strcat(*environ, value);
 	environ = tmp;
 
 	return (0);
@@ -78,10 +78,10 @@ int _setenv(char *_env, char *value)
 	char** iter;
 	size_t len;
 
-	if (!_env || !strlen(_env))
+	if (!_env || !_strlen(_env))
 		return (-1);
 
-	len = strlen(_env);
+	len = _strlen(_env);
 
 	while (!(*iter))
 	{
