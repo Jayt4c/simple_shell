@@ -78,7 +78,7 @@ int path_handler(char* cmd)
 		{
 			ch = iter[x];
 			iter[x] = '\0';
-			cmd_path = malloc(strlen(cmd) + (x + 2));
+			cmd_path = malloc(1024);
 			if (!cmd_path)
 				return (0);
 			strcpy(cmd_path, iter);
@@ -92,8 +92,9 @@ int path_handler(char* cmd)
 			{
 				if (ltr_check(args))
 				{
-					puts("check\n");
+					printf("ARGS ARE %s\n", args);
 					strcat(cmd_path, args);
+					puts("check\n");
 					free(args);
 				}
 				execute_promptcommand(cmd_path);

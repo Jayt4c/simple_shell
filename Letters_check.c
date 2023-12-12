@@ -14,7 +14,7 @@ int ltr_check(char *s)
 
 	for (x = 0; s[x]; x++)
 	{
-		if ((s[x] > 'a' && s[x] < 'z') || (s[x] > 'A' && s[x] < 'Z'))
+		if ((s[x] >= 'a' && s[x] <= 'z') || (s[x] >= 'A' && s[x] <= 'Z'))
 			return (1);
 	}
 	return (0);
