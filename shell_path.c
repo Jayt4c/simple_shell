@@ -24,11 +24,16 @@ char* _get_env(char* _env)
 			path = _strtok(NULL, "\n");
 			if (path)
 			{
+				free(s);
 				return (path);
 			}
 			else
+			{
+				free(s);
 				return (NULL);
+			}
 		}
+		free(s);
 	}
 	return (NULL);
 }
