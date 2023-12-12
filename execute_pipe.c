@@ -2,8 +2,7 @@
 
 /**
  * execute_pipe_commands - execute
- * @commands: command
- * num_command: number of commands
+ * @command: command
  */
 
 void execute_pipe_commands(const char *command)
@@ -11,8 +10,7 @@ void execute_pipe_commands(const char *command)
 	int pipefd[2];
 	pid_t pid;
 	int status;
-	char *command1;
-	char *command2;
+	char *command1, *command2;
 	char command_copy[1024];
 
 	strcpy(command_copy, command);
