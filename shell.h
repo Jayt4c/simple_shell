@@ -16,7 +16,7 @@ void non_interactive_mode(const char *filename);
 void interactive_mode(void);
 void printout(const char *string);
 void display_prompt(void);
-void get_input(char *command, size_t size);
+void get_input(char **command, size_t *size);
 void tokenize(const char *command, char **args);
 void execute_promptcommand(const char *command);
 void execute_pipe_commands(const char *command);
