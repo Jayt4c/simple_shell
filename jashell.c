@@ -20,11 +20,9 @@ int main(void)
 			free(command);
 			exit(0);
 		}
-
 		if (strlen(command) == 0)
-		{
 			continue;
-		}
+
 		if (strcmp(command, "exit") == 0)
 		{
 			printout("Exiting shell...\n");
