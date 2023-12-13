@@ -28,8 +28,8 @@ int main(void)
 		if ((command[0] >= 'a' && command[0] <= 'z') || (command[0] >= 'A'
 			&& command[0] <= 'Z'))
 		{
-			/*path_handler(command);*/
-			execute_promptcommand(command);
+			path_handler(command);
+			/*execute_promptcommand(command);*/
 		} else if (command[0] == '/')
 		{
 			path_handler(command);

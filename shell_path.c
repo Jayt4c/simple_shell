@@ -41,33 +41,23 @@ char* _get_env(char* _env)
  * Return: 1 on success, 0 in failure
 */
 
-int path_handler(char* cmd)
+int path_handler(char* cmd, char** args)
 {
-	char* path, * cmd_path, * iter, * tmp, ch, * args;
+	char* path, * cmd_path, * iter, * tmp, ch;
 	int x, len;
 
-	if (cmd[0] == '/')
-	{
-		execute_promptcommand(cmd);
-		return(1);
-	}
+	x = 0;
 	tmp = _get_env("PATH");
 	if (!tmp)
 		return (0);
-	path = strdup(tmp);
+
+	path = _strdup(tmp);
 	if (!path)
 		return (0);
-	if (strchr(cmd, ' '))
-	{
-		args = malloc(1024);
-		if (!args)
-			return (0);
-		strcpy(args, strchr(cmd, ' '));
-	}
 
-	len = strlen(path);
+	len = _strlen(path);
 	iter = path;
-	for (x = 0; x < len; x++)
+	while (x < len)
 	{
 		if (iter[x] == '\0' || iter[x] == ':')
 		{
@@ -76,23 +66,13 @@ int path_handler(char* cmd)
 			cmd_path = malloc(1024);
 			if (!cmd_path)
 				return (0);
-			strcpy(cmd_path, iter);
-			strcat(cmd_path, "/");
-			if (strlen(args))
-				strcat(cmd_path, strtok(cmd, " "));
-			else
-				strcat(cmd_path, cmd);
-			/*printf("This is the command -> %s\n", cmd_path);*/
-
+			_strcpy(cmd_path, iter);
+			_strcat(cmd_path, "/");
+			_strcat(cmd_path, cmd);
 			if (!access(cmd_path, X_OK))
 			{
 				free(path);
-				if (ltr_check(args))
-				{
-					strcat(cmd_path, args);
-					free(args);
-				}
-				execute_promptcommand(cmd_path);
+				execute_promptcommand(cmd_path, args);
 				free(cmd_path);
 				return (1);
 			}
@@ -105,9 +85,8 @@ int path_handler(char* cmd)
 				x = 0;
 			}
 		}
+		x++;
 	}
-	execute_promptcommand(cmd);
-	free(path);
 	return (0);
 }
 

@@ -13,7 +13,7 @@ void get_input(char **command, size_t *size)
 
 	if (input_size == -1)
 	{
-		printout("exit due to end-of-file\n");
+		/*printout("exit due to end-of-file\n");*/
 		exit(EXIT_FAILURE);
 	}
 	(*command)[input_size - 1] = '\0';
