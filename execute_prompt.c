@@ -24,7 +24,7 @@ void execute_promptcommand(const char *command)
 
 	for (x = 0; hold; x++)
 	{
-		args[x] = malloc(_strlen(hold) + 1);
+		args[x] = malloc(64);
 		if (!args[x])
 		{
 			x -= 1;
@@ -32,7 +32,7 @@ void execute_promptcommand(const char *command)
 				free(args[x]);
 			return;
 		}
-		_strcpy(args[x], hold);
+		strcpy(args[x], hold);
 		hold = strtok(NULL, " ");
 	}
 	args[x] = NULL;

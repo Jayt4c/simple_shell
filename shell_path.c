@@ -24,21 +24,13 @@ char* _get_env(char* _env)
 			path = _strtok(NULL, "\n");
 			if (path)
 			{
-				free(s);
 				return (path);
 			}
-			else
-			{
-				free(s);
-				return (NULL);
-			}
 		}
-		free(s);
 	}
+
 	return (NULL);
 }
-
-
 
 
 /**
@@ -46,7 +38,7 @@ char* _get_env(char* _env)
  *
  * @cmd: The command that user entered
  *
- * Return: void
+ * Return: 1 on success, 0 in failure
 */
 
 int path_handler(char* cmd)
@@ -62,20 +54,18 @@ int path_handler(char* cmd)
 	tmp = _get_env("PATH");
 	if (!tmp)
 		return (0);
-
-	path = _strdup(tmp);
+	path = strdup(tmp);
 	if (!path)
 		return (0);
-
-	if (_strchr(cmd, ' '))
+	if (strchr(cmd, ' '))
 	{
-		args = malloc(_strlen(_strchr(cmd, ' ')) + 1);
+		args = malloc(1024);
 		if (!args)
 			return (0);
-		_strcpy(args, _strchr(cmd, ' '));
+		strcpy(args, strchr(cmd, ' '));
 	}
 
-	len = _strlen(path);
+	len = strlen(path);
 	iter = path;
 	for (x = 0; x < len; x++)
 	{
@@ -86,19 +76,20 @@ int path_handler(char* cmd)
 			cmd_path = malloc(1024);
 			if (!cmd_path)
 				return (0);
-			_strcpy(cmd_path, iter);
-			_strcat(cmd_path, "/");
-			if (_strlen(args))
-				_strcat(cmd_path, _strtok(cmd, " "));
+			strcpy(cmd_path, iter);
+			strcat(cmd_path, "/");
+			if (strlen(args))
+				strcat(cmd_path, strtok(cmd, " "));
 			else
-				_strcat(cmd_path, cmd);
+				strcat(cmd_path, cmd);
+			/*printf("This is the command -> %s\n", cmd_path);*/
 
 			if (!access(cmd_path, X_OK))
 			{
 				free(path);
 				if (ltr_check(args))
 				{
-					_strcat(cmd_path, args);
+					strcat(cmd_path, args);
 					free(args);
 				}
 				execute_promptcommand(cmd_path);
@@ -116,7 +107,6 @@ int path_handler(char* cmd)
 		}
 	}
 	execute_promptcommand(cmd);
-	printout("Command not found\n");
 	free(path);
 	return (0);
 }
