@@ -34,7 +34,6 @@ void execute_promptcommand(const char *command)
 		}
 		_strcpy(args[x], hold);
 		hold = strtok(NULL, " ");
-		printf("%s\n", args[x]);
 	}
 	args[x] = NULL;
 
