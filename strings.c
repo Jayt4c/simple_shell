@@ -12,7 +12,7 @@
 */
 
 
-int _strncmp(char* s1, char* s2, size_t x)
+int _strncmp(char *s1, char *s2, size_t x)
 {
 	size_t i;
 	int diff;
@@ -40,7 +40,7 @@ int _strncmp(char* s1, char* s2, size_t x)
  * and NULL if not
 */
 
-char* _strpbrk(char* s, char* accept)
+char *_strpbrk(char *s, char *accept)
 {
 	int x = 0;
 	int y;
@@ -74,7 +74,7 @@ char* _strpbrk(char* s, char* accept)
  * Return: copied string
 */
 
-char* _strncpy(char* dest, char* src, int n)
+char *_strncpy(char *dest, char *src, int n)
 {
 	int y;
 
@@ -100,7 +100,7 @@ char* _strncpy(char* dest, char* src, int n)
  * Return: The difference between first two different chars
 */
 
-int _strcmp(const char* s1,const char* s2)
+int _strcmp(const char *s1,const char *s2)
 {
 	int cmp = 0;
 	int x = 0;

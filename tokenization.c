@@ -8,7 +8,7 @@
  * Return: Array of arguments
 */
 
-char** tokenize(char* cmd)
+char **tokenize(char *cmd)
 {
     size_t num_tokens = 15, i, x;
     char* tok, ** arr;

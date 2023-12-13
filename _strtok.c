@@ -10,7 +10,7 @@
  * Return: The string right before a delimeter
  */
 
-char* _strtok(char* s, const char* del) {
+char *_strtok(char *s, const char *del) {
     static char* rem;
     char* tok, * p;
     size_t len;
