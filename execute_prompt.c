@@ -20,15 +20,21 @@ void execute_promptcommand(const char *command)
 		exit(EXIT_FAILURE);
 	}
 
-	hold = _strtok((char *)command, " ");
+	hold = strtok((char *)command, " ");
 
 	for (x = 0; hold; x++)
 	{
-		args[x] = malloc(strlen(hold) + 1);
+		args[x] = malloc(_strlen(hold) + 1);
 		if (!args[x])
+		{
+			x -= 1;
+			for (; x >= 0; x--)
+				free(args[x]);
 			return;
-		strcpy(args[x], hold);
-		hold = _strtok(NULL, " ");
+		}
+		_strcpy(args[x], hold);
+		hold = strtok(NULL, " ");
+		printf("%s\n", args[x]);
 	}
 	args[x] = NULL;
 
@@ -40,7 +46,7 @@ void execute_promptcommand(const char *command)
 			exit(EXIT_FAILURE);
 
 		case 0:
-			execv(args[0], args);
+			/*execv(args[0], args);*/
 			execute_child_process(args, args[0]);
 			break;
 

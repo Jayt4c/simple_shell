@@ -12,12 +12,12 @@ void execute_child_process(char **args, const char *command)
 {
 	int i;
 
-	if (strchr(command, '|') != NULL)
+	if (_strchr((char *)command, '|') != NULL)
 	{
 		execute_pipe_commands(command);
 	}
 
-	if (strcmp(args[0], "echo") == 0)
+	if (_strcmp(args[0], "echo") == 0)
 	{
 		for (i = 1; args[i] != NULL; i++)
 		{

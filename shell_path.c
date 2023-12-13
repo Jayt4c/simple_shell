@@ -73,6 +73,7 @@ int path_handler(char* cmd)
 		if (!args)
 			return (0);
 		_strcpy(args, _strchr(cmd, ' '));
+		printf("allocation done\n");
 	}
 
 	len = _strlen(path);
@@ -99,10 +100,12 @@ int path_handler(char* cmd)
 				if (ltr_check(args))
 				{
 					_strcat(cmd_path, args);
+					printf("Cmd is %s\n", cmd_path);
 					free(args);
 				}
+				printf("before executing\n");
 				execute_promptcommand(cmd_path);
-				printout("-------------------------------------------------\n");
+				printf("after freeing cmdpath\n");
 				free(cmd_path);
 				return (1);
 			}

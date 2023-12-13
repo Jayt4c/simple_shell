@@ -38,5 +38,6 @@ char* _strcpy(char* dest, char* src);
 char* _strchr(char* s, char c);
 char* _strpbrk(char* s, char* accept);
 char* _strncpy(char* dest, char* src, int n);
+int _strcmp(const char* s1,const char* s2);
 
 #endif
