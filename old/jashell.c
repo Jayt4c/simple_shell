@@ -8,7 +8,7 @@
 int main(void)
 {
 	/*char command[1024];*/
-	size_t x;
+
 	for (;;)
 	{
 		char *command = NULL;
@@ -16,13 +16,11 @@ int main(void)
 		size_t size = 0;
 		display_prompt();
 
-		if (getline(&command, &size, stdin) == -1)
+		if (getline(&command, &size, stdin) = -1)
 		{
 			free(command);
 			exit(0);
 		}
-		x = strlen(command);
-		command[x - 1] = '\0';
 		if (strlen(command) == 0)
 			continue;
 
@@ -45,8 +43,7 @@ int main(void)
 			free_args(cmd_args);
 		}
 		free(command);
-		if (isatty(STDIN_FILENO))
-			continue;
 	}
+
 	return (0);
 }

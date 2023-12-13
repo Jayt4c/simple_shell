@@ -8,6 +8,6 @@
 
 void display_prompt(void)
 {
-	printout("");
+	printout("$ ");
 	fflush(stdout);
 }

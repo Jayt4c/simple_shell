@@ -29,22 +29,22 @@ char* _strtok(char* s, const char* del) {
         len = p - rem;
         tok = malloc(len + 1);
 
-        if (!tok) {
-            return (NULL);
+        if (tok == NULL) {
+            return NULL; 
         }
 
         _strncpy(tok, rem, len);
         tok[len] = '\0';
         rem = p + 1;
     }
-    else
-    {
+    else {
         len = strlen(rem);
         tok = malloc(len + 1);
 
         if (tok == NULL) {
-            return (NULL);
+            return NULL; 
         }
+
         _strcpy(tok, rem);
         rem = NULL;
     }

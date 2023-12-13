@@ -24,12 +24,10 @@ char* _get_env(char* _env)
 			path = _strtok(NULL, "\n");
 			if (path)
 			{
-				free(s);
 				return (path);
 			}
 		}
 	}
-	free(s);
 	return (NULL);
 }
 
@@ -46,16 +44,17 @@ int path_handler(char* cmd, char** args)
 {
 	char* path, * cmd_path, * iter, * tmp, ch;
 	int x, len;
+
 	x = 0;
 	tmp = _get_env("PATH");
 	if (!tmp)
 		return (0);
 
-	path = strdup(tmp);
+	path = _strdup(tmp);
 	if (!path)
 		return (0);
 
-	len = strlen(path);
+	len = _strlen(path);
 	iter = path;
 	while (x < len)
 	{
@@ -66,10 +65,10 @@ int path_handler(char* cmd, char** args)
 			cmd_path = malloc(1024);
 			if (!cmd_path)
 				return (0);
-			strcpy(cmd_path, iter);
-			strcat(cmd_path, "/");
-			strcat(cmd_path, cmd);
-			if (access(cmd_path, X_OK) == 0)
+			_strcpy(cmd_path, iter);
+			_strcat(cmd_path, "/");
+			_strcat(cmd_path, cmd);
+			if (!access(cmd_path, X_OK))
 			{
 				free(path);
 				execute_promptcommand(cmd_path, args);

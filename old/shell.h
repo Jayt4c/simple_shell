@@ -19,13 +19,13 @@ void interactive_mode(void);
 void printout(const char *string);
 void display_prompt(void);
 void get_input(char **command, size_t *size);
-char** tokenize(char* cmd);
-void execute_promptcommand(char* cmd, char** args);
+void tokenize(const char *command, char **args);
+void execute_promptcommand(const char *command);
 void execute_pipe_commands(const char *command);
 void execute_child_process(char **args, const char *command/*, int input_fd, int output_fd*/);
 char *_get_env(char *_env);
 void cat(const char *file);
-int path_handler(char* cmd, char** args);
+int path_handler(char *cmd);
 char *_strtok(char* s, const char* del);
 int count_commands(const char *command);
 char *_strtok(char *s, const char *del);
@@ -41,6 +41,5 @@ char* _strchr(char* s, char c);
 char* _strpbrk(char* s, char* accept);
 char* _strncpy(char* dest, char* src, int n);
 int _strcmp(const char* s1,const char* s2);
-void free_args(char** args);
 
 #endif

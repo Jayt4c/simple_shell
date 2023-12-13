@@ -7,7 +7,7 @@
  **/
 
 
-/*void execute_file(const char* filename)
+void execute_file(const char *filename)
 {
 	char *line = NULL;
 	size_t line_size = 0;
@@ -35,4 +35,3 @@
 	close(fd);
 	free(line);
 }
-*/

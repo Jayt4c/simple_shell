@@ -14,12 +14,12 @@ void execute_promptcommand(char* cmd, char** args)
 
 	id = fork();
 
-	if (id == 0)
+	if (x == 0)
 	{
-		execve(cmd, args, environ);
+		execve(p, arguments, environ);
 		exit(0);
 	}
 	stat = 127;
-	wait(&stat);
+	wait(&status);
 	return;
 }

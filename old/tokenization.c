@@ -17,7 +17,7 @@ char** tokenize(char* cmd)
     if (!arr)
         return (NULL);
 
-    tok = strtok(cmd, " ");
+    tok = _strtok(cmd, " ");
     x = 0;
 
     while (tok)
@@ -42,7 +42,7 @@ char** tokenize(char* cmd)
         }
         strcpy(arr[x], tok);
         x++;
-        tok = strtok(NULL, " ");
+        tok = _strtok(NULL, " ");
     }
     arr[x] = NULL;
     return (arr);
