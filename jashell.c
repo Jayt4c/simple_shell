@@ -13,9 +13,14 @@ int main(void)
 	{
 		char *command = NULL;
 		size_t size = 0;
-
 		display_prompt();
-		get_input(&command, &size);
+
+		if (getline(&command, &size, stdin) = -1)
+		{
+			free(command);
+			exit(0);
+		}
+
 		if (strlen(command) == 0)
 		{
 			continue;

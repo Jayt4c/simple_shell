@@ -11,6 +11,8 @@
 #include <fcntl.h>
 
 
+extern char** environ;
+
 void execute_file(const char *filename);
 void non_interactive_mode(const char *filename);
 void interactive_mode(void);

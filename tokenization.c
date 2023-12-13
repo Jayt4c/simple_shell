@@ -1,38 +1,57 @@
 #include "shell.h"
 
 /**
- * execute_promptcommand - Execute the command entered at the prompt.
+ * tokenize - Tokenizes the entered command
  *
- * @command: The command string to execute
+ * @cmd: The command string to be seperated
  *
- **/
+ * Return: Array of arguments
+*/
 
-void tokenize(const char *command, char **args)
-{
-	size_t i; int j;
-	
-	char *token = _strtok((char *)command, " ");
-	i = 0;
-	while (token != NULL)
-	{
-		args[i] = malloc(strlen(token) + 1);
-		if (args[i] == NULL)
-		{
-			perror("malloc for tokenzation failed");
-			for (j = 0; j < 1; j++)
-			{
-				free(args[j]);
-			}
-			free(args);
-			exit(EXIT_FAILURE);
-		}
-		strcpy(args[i], token);
-		token = _strtok(NULL, " ");
-		i++;
-	}
-	args[i] = NULL;
+char** tokenize(char* cmd) {
 
+    size_t num_tokens = 15, i, x;
+    char* tok, ** arr;
+
+    arr = malloc(sizeof(char*) * num_tokens);
+    if (!arr)
+        return (NULL);
+
+    tok = _strtok(cmd, " ");
+    x = 0;
+
+    while (tok) {
+        if (x >= num_tokens) {
+            num_tokens *= 2;
+            arr = realloc(arr, sizeof(char*) * num_tokens);
+            if (!arr) {
+                free(arr);
+                return NULL;
+            }
+        }
+        arr[x] = malloc(strlen(tok) + 1);
+        if (!arr[x]) {
+            for (i = 0; i < x; i++) {
+                free(arr[i]);
+            }
+            free(arr);
+            return NULL;
+        }
+        strcpy(arr[x], tok);
+        x++;
+        tok = _strtok(NULL, " ");
+    }
+    arr[x] = NULL;
+    return (arr);
 }
+
+/**
+ * free_args - frees array of strings
+ * 
+ * @args: An array will be freed
+ *
+ * Return: void
+ */
 
 void free_args(char **args)
 {
