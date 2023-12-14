@@ -38,16 +38,56 @@ char** tokenize(char* cmd) {
  * Return: void
  */
 
-void free_args(char **args)
+void free_args(char** args)
 {
     int i;
 
-    if (!args) {
+    if (!args)
         return;
-    }
-    for (i = 0; args[i + 2]; ++i) {
+
+    for (i = 0; args[i]; ++i)
         free(args[i]);
-    }
+
+    free(args);
+}
+
+/**
+ * free_args_1 - frees array of strings
+ *
+ * @args: An array will be freed
+ *
+ * Return: void
+ */
+void free_args_1(char** args)
+{
+    int i;
+
+    if (!args)
+        return;
+
+    for (i = 0; args[i + 1]; ++i)
+        free(args[i]);
+
+    free(args);
+}
+
+/**
+ * free_args_1 - frees array of strings
+ *
+ * @args: An array will be freed
+ *
+ * Return: void
+ */
+
+void free_args_2(char **args)
+{
+    int i;
+
+    if (!args)
+        return;
+
+    for (i = 0; args[i + 2]; ++i)
+        free(args[i]);
 
     free(args);
 }

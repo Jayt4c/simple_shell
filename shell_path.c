@@ -30,6 +30,7 @@ char *_get_env(char *_env)
 			}
 		}
 		free(s);
+		s = NULL;
 	}
 	return (NULL);
 }
@@ -48,7 +49,6 @@ int path_handler(char *cmd, char **args)
 
 	char* path, * cmd_path, * iter, /** tmp, */ch;
 	int x, len;
-
 	x = 0;
 
 	path = _get_env("PATH");
@@ -57,7 +57,6 @@ int path_handler(char *cmd, char **args)
 	/*path = strdup(tmp);*/
 	if (!path)
 		return (0);
-
 	/*free(tmp);*/
 
 	len = strlen(path);
@@ -68,9 +67,12 @@ int path_handler(char *cmd, char **args)
 		{
 			ch = iter[x];
 			iter[x] = '\0';
-			cmd_path = malloc(1024);
+			cmd_path = malloc(512);
 			if (!cmd_path)
+			{
+				free(path);
 				return (0);
+			}
 			strcpy(cmd_path, iter);
 			strcat(cmd_path, "/");
 			strcat(cmd_path, cmd);

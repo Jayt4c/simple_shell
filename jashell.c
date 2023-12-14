@@ -8,15 +8,17 @@
 int main(void)
 {
 	/*char command[1024];*/
+	char *command = NULL;
+	char **cmd_args = NULL;
 	size_t x;
-	for (;;)
+	int measure;
+
+	do
 	{
-		char *command = NULL;
-		char** cmd_args = NULL;
 		size_t size = 0;
 		display_prompt();
-
-		if (getline(&command, &size, stdin) == -1)
+		measure = getline(&command, &size, stdin);	
+		if (measure == -1)
 		{
 			free(command);
 			exit(0);
@@ -24,29 +26,29 @@ int main(void)
 		x = strlen(command);
 		command[x - 1] = '\0';
 		if (strlen(command) == 0)
+		{
+			free(command);
 			continue;
-
+		}
 		if (strcmp(command, "exit") == 0)
 		{
-			printout("Exiting shell...\n");
-			break;
+			free(command);
+			return (69);
 		}
-		if ((command[0] >= 'a' && command[0] <= 'z') || (command[0] >= 'A'
-			&& command[0] <= 'Z'))
+		cmd_args = tokenize(command);
+		if (path_handler(cmd_args[0], cmd_args) == 0)
 		{
-			cmd_args = tokenize(command);
-			path_handler(cmd_args[0], cmd_args);
-			free_args(cmd_args);
-		}
-		else if (command[0] == '/')
-		{
-			cmd_args = tokenize(command);
 			execute_promptcommand(cmd_args[0], cmd_args);
-			free_args(cmd_args);
-		}
-		free(command);
-		if (isatty(STDIN_FILENO))
+			free(cmd_args);
+			free(command);
 			continue;
-	}
+		}
+		else
+		{
+			free(cmd_args);
+			free(command);
+		}
+	} while (isatty(STDIN_FILENO) || measure != EOF);
+	
 	return (0);
 }
