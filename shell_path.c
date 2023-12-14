@@ -46,19 +46,19 @@ char *_get_env(char *_env)
 int path_handler(char *cmd, char **args)
 {
 
-	char* path, * cmd_path, * iter, /** tmp, */ch;
+	char* path, * cmd_path, * iter, * tmp, ch;
 	int x, len;
 
 	x = 0;
 
-	path = _get_env("PATH");
-	/*if (!tmp)
-		return (0);*/
-	/*path = strdup(tmp);*/
+	tmp = _get_env("PATH");
+	if (!tmp)
+		return (0);
+	path = strdup(tmp);
 	if (!path)
 		return (0);
 
-	/*free(tmp);*/
+	free(tmp);
 
 	len = strlen(path);
 	iter = path;
