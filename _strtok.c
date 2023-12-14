@@ -3,28 +3,28 @@
 /**
  * _strtok - Gets the string right before a delimeter
  *
- * @s: Full string to be checked
+ * @str: Full string to be checked
  *
- * @del: the delimeter
+ * @delimiter: the delimeter
  *
  * Return: The string right before a delimeter
  */
 
 
 
-char* _strtok(const char* str, const char* delimiter)
+char *_strtok(const char *str, const char *delimiter)
 {
 
-	char* delim_pos, * substring;
+	char *delim_pos, *substring;
 	size_t substring_len;
 
 	if (!str || !delimiter || !*str)
-		return NULL;
+		return (NULL);
 
 	delim_pos = strchr(str, *delimiter);
 
 	if (!delim_pos)
-		return strdup(str);
+		return (strdup(str));
 
 	substring_len = delim_pos - str;
 
@@ -39,45 +39,3 @@ char* _strtok(const char* str, const char* delimiter)
 
 	return (substring);
 }
-
-/*
-char *_strtok(char *s, const char *del)
-{
-	static char *rem;
-	char *tok,  *p;
-	size_t len;
-
-	if (s != NULL)
-	{
-		rem = s;
-	}
-
-	if (rem == NULL || *rem == '\0')
-	{
-		return (NULL);
-	}
-
-	p = _strpbrk(rem, (char *)del);
-
-	if (p != NULL)
-	{
-		len = p - rem;
-		tok = malloc(len + 1);
-		if (!tok)
-			return (NULL);
-
-		strncpy(tok, rem, len);
-		tok[len] = '\0';
-		rem = p + 1;
-	} else
-	{
-		len = strlen(rem);
-		tok = malloc(len + 1);
-		if (tok == NULL)
-			return (NULL);
-		_strcpy(tok, rem);
-		rem = NULL;
-	}
-	return (tok);
-}
-*/

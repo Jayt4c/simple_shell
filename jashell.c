@@ -7,15 +7,12 @@
 
 int main(void)
 {
-	/*char command[1024];*/
-	size_t x;
 	for (;;)
 	{
-		char *command = NULL;
-		char** cmd_args = NULL;
-		size_t size = 0;
-		display_prompt();
+		char *command = NULL, **cmd_args = NULL;
+		size_t x, size = 0;
 
+		display_prompt();
 		if (getline(&command, &size, stdin) == -1)
 		{
 			free(command);
@@ -28,15 +25,12 @@ int main(void)
 			free(command);
 			continue;
 		}
-
 		if (strcmp(command, "exit") == 0)
 		{
-			printout("Exiting shell...\n");
 			free(command);
 			break;
 		}
-		if ((command[0] >= 'a' && command[0] <= 'z') || (command[0] >= 'A'
-			&& command[0] <= 'Z'))
+		if ((command[0] >= 'a' && command[0] <= 'z'))
 		{
 			cmd_args = tokenize(command);
 			path_handler(cmd_args[0], cmd_args);
