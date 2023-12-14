@@ -40,5 +40,6 @@ int _strcmp(const char *s1, const char *s2);
 void free_args(char **args);
 void free_args_1(char **args);
 void free_args_2(char **args);
+void lst_env(void);
 
 #endif

@@ -35,6 +35,12 @@ int main(void)
 			free(command);
 			return (69);
 		}
+		if (_strcmp(command, "env") == 0)
+		{
+			lst_env();
+			free(command);
+			continue;
+		}
 		cmd_args = tokenize(command);
 		if (path_handler(cmd_args[0], cmd_args) == 0)
 		{
