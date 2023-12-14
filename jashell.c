@@ -33,7 +33,7 @@ int main(void)
 		if (strcmp(command, "exit") == 0)
 		{
 			free(command);
-			return (69);
+			return (0);
 		}
 		if (_strcmp(command, "env") == 0)
 		{
