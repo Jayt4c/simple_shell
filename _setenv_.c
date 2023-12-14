@@ -33,7 +33,6 @@ char *envname(char *str)
 
 int _setenv(char *_env, char *value)
 {
-	extern char **environ;
 	int new_len;
 	char *updt, **tmp;
 

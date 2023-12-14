@@ -26,9 +26,8 @@ void execute_child_process(char **args, const char *command/*, int input_fd, int
 char *_get_env(char *_env);
 void cat(const char *file);
 int path_handler(char* cmd, char** args);
-char *_strtok(char* s, const char* del);
 int count_commands(const char *command);
-char *_strtok(char *s, const char *del);
+char *_strtok(const char *str, const char* delimiters);
 int _setenv(char *_env, char *value);
 char *envname(char* str);
 int ltr_check(char* s);
