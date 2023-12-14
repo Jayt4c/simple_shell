@@ -2,7 +2,7 @@
 
 /**
  * envname - Gets the name an environment variable
- *
+ * 
  * @str: the variable its name will be extracted
  *
  * Return: Environment variable name
@@ -33,7 +33,6 @@ char *envname(char *str)
 
 int _setenv(char *_env, char *value)
 {
-/*	extern char **environ;*/
 	int new_len;
 	char *updt, **tmp;
 
@@ -71,3 +70,26 @@ int _setenv(char *_env, char *value)
 	return (0);
 }
 
+/*int _unsetenv(char* _env)
+{
+	extern char **environ;
+	char** iter;
+	size_t len;
+
+	if (!_env || !_strlen(_env))
+		return (-1);
+
+	len = _strlen(_env);
+
+	while (!(*iter))
+	{
+		if (!strncmp(_env, *iter, len))
+		{
+			if ((*iter)[len] = '=')
+			{
+
+			}
+		}
+		iter++;
+	}
+}*/

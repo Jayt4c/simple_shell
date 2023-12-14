@@ -1,6 +1,41 @@
 #include "shell.h"
 
 /**
+* _get_env - Gets the environment variable
+*
+* @env: Environment variable will be returned
+*
+* Return: The value of an environment variable
+*/
+
+char *_get_env(char *_env)
+{
+	char *s, *path;
+	int x, len;
+	if (_env == NULL)
+		return (NULL);
+
+	for (x = 0; environ[x]; x++)
+	{
+		len = _strlen(_env);
+		s = _strtok(environ[x], "=");
+		if (strcmp(_env, s) == 0)
+		{
+			path = strdup(environ[x] + len);
+			if (path)
+			{
+				if(s)
+					free(s);
+				return (path);
+			}
+		}
+		free(s);
+	}
+	return (NULL);
+}
+
+
+/**
  * path_handler - checks whether the cmd path is existed or not
  *
  * @cmd: The command that user entered
@@ -10,17 +45,20 @@
 
 int path_handler(char *cmd, char **args)
 {
-	char *path, *cmd_path, *iter, *tmp, ch;
+
+	char* path, * cmd_path, * iter, /** tmp, */ch;
 	int x, len;
 
 	x = 0;
-	tmp = _get_env("PATH");
-	if (!tmp)
-		return (0);
 
-	path = strdup(tmp);
+	path = _get_env("PATH");
+	/*if (!tmp)
+		return (0);*/
+	/*path = strdup(tmp);*/
 	if (!path)
 		return (0);
+
+	/*free(tmp);*/
 
 	len = strlen(path);
 	iter = path;
