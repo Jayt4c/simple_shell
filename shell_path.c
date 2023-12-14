@@ -32,7 +32,10 @@ int path_handler(char *cmd, char **args)
 			iter[x] = '\0';
 			cmd_path = malloc(1024);
 			if (!cmd_path)
+			{
+				free(path);
 				return (0);
+			}
 			strcpy(cmd_path, iter);
 			strcat(cmd_path, "/");
 			strcat(cmd_path, cmd);
@@ -54,5 +57,6 @@ int path_handler(char *cmd, char **args)
 		}
 		x++;
 	}
+	free(path);
 	return (0);
 }

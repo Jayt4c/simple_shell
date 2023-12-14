@@ -24,11 +24,15 @@ int main(void)
 		x = strlen(command);
 		command[x - 1] = '\0';
 		if (strlen(command) == 0)
+		{
+			free(command);
 			continue;
+		}
 
 		if (strcmp(command, "exit") == 0)
 		{
 			printout("Exiting shell...\n");
+			free(command);
 			break;
 		}
 		if ((command[0] >= 'a' && command[0] <= 'z') || (command[0] >= 'A'
