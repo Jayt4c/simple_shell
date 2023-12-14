@@ -3,11 +3,12 @@
 /**
  * execute_promptcommand - Execute the command entered at the prompt.
  *
- * @command: The command string to execute
+ * @cmd: The command string to execute
+ * @args: arguments
  *
  **/
 
-void execute_promptcommand(char* cmd, char** args)
+void execute_promptcommand(char *cmd, char **args)
 {
 	pid_t id;
 	int stat;
@@ -21,5 +22,4 @@ void execute_promptcommand(char* cmd, char** args)
 	}
 	stat = 127;
 	wait(&stat);
-	return;
 }

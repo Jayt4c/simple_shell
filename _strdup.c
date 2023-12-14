@@ -45,7 +45,7 @@ char *_strdup(char *str)
  * Return: The length of the string input
 */
 
-int _strlen(char* s)
+int _strlen(char *s)
 {
 	int count = 0;
 
@@ -65,7 +65,7 @@ int _strlen(char* s)
  * Return: concatenated string
 */
 
-char* _strcat(char* dest, char* src)
+char *_strcat(char *dest, char *src)
 {
 	int i = 0;
 	int y = 0;
@@ -91,7 +91,7 @@ char* _strcat(char* dest, char* src)
  * Return: The string after locating the character
 */
 
-char* _strchr(char* s, char c)
+char *_strchr(char *s, char c)
 {
 	int x = 0;
 
@@ -119,7 +119,7 @@ char* _strchr(char* s, char c)
 */
 
 
-char* _strcpy(char* dest, char* src)
+char *_strcpy(char *dest, char *src)
 {
 	int x = -1;
 

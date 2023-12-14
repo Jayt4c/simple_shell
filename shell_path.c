@@ -8,9 +8,9 @@
 * Return: The value of an environment variable
 */
 
-char* _get_env(char* _env)
+char *_get_env(char *_env)
 {
-	char* s, * path;
+	char *s, *path;
 	int x, len;
 	if (_env == NULL)
 		return (NULL);
@@ -43,10 +43,12 @@ char* _get_env(char* _env)
  * Return: 1 on success, 0 in failure
 */
 
-int path_handler(char* cmd, char** args)
+int path_handler(char *cmd, char **args)
 {
+
 	char* path, * cmd_path, * iter, /** tmp, */ch;
 	int x, len;
+
 	x = 0;
 
 	path = _get_env("PATH");
@@ -93,4 +95,3 @@ int path_handler(char* cmd, char** args)
 	free(path);
 	return (0);
 }
-
