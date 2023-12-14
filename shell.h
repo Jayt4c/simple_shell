@@ -41,5 +41,6 @@ void free_args(char **args);
 void free_args_1(char **args);
 void free_args_2(char **args);
 void lst_env(void);
+int redirect(char* command);
 
 #endif

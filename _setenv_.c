@@ -2,7 +2,7 @@
 
 /**
  * envname - Gets the name an environment variable
- * 
+ *
  * @str: the variable its name will be extracted
  *
  * Return: Environment variable name
@@ -70,10 +70,17 @@ int _setenv(char *_env, char *value)
 	return (0);
 }
 
-/*int _unsetenv(char* _env)
+/**
+ * _unsetenv - Remove an environment variable
+ *
+ * @_env: the name of an environment variable
+ *
+ * Return: 0 if succeed, -1 if failed
+*/
+
+int _unsetenv(char *_env)
 {
-	extern char **environ;
-	char** iter;
+	char **iter;
 	size_t len;
 
 	if (!_env || !_strlen(_env))
@@ -85,11 +92,13 @@ int _setenv(char *_env, char *value)
 	{
 		if (!strncmp(_env, *iter, len))
 		{
-			if ((*iter)[len] = '=')
+			if ((*iter)[len] == '=')
 			{
-
+				continue;
 			}
 		}
 		iter++;
 	}
-}*/
+	return (0);
+}
+

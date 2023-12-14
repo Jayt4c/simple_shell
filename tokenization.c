@@ -8,26 +8,26 @@
  * Return: Array of arguments
 */
 
-char** tokenize(char* cmd) {
+char **tokenize(char *cmd)
+{
+	char **arr;
+	size_t x;
+	int y;
 
-    char** arr;
-    size_t x; 
-    int y;
+	x = strlen(cmd);
 
-    x = strlen(cmd);
+	arr = malloc(sizeof(char *) * x);
+	if (!arr)
+		perror("Allocation failed\n");
 
-    arr = malloc(sizeof(char*) * x);
-    if (!arr)
-        perror("Allocation failed\n");
-
-    y = 0;
-    arr[0] = strtok(cmd, " ");
-    while (arr[y] != NULL)
-    {
-        y++;
-        arr[y] = strtok(NULL, " ");
-    }
-    return (arr);
+	y = 0;
+	arr[0] = strtok(cmd, " ");
+	while (arr[y] != NULL)
+	{
+		y++;
+		arr[y] = strtok(NULL, " ");
+	}
+	return (arr);
 }
 
 /**
@@ -38,17 +38,17 @@ char** tokenize(char* cmd) {
  * Return: void
  */
 
-void free_args(char** args)
+void free_args(char **args)
 {
-    int i;
+	int i;
 
-    if (!args)
-        return;
+	if (!args)
+		return;
 
-    for (i = 0; args[i]; ++i)
-        free(args[i]);
+	for (i = 0; args[i]; ++i)
+		free(args[i]);
 
-    free(args);
+	free(args);
 }
 
 /**
@@ -57,37 +57,17 @@ void free_args(char** args)
  * @args: An array will be freed
  *
  * Return: void
- */
-void free_args_1(char** args)
+*/
+void free_args_1(char **args)
 {
-    int i;
+	int i;
 
-    if (!args)
-        return;
+	if (!args)
+		return;
 
-    for (i = 0; args[i + 1]; ++i)
-        free(args[i]);
+	for (i = 0; args[i + 1]; ++i)
+		free(args[i]);
 
-    free(args);
+	free(args);
 }
 
-/**
- * free_args_1 - frees array of strings
- *
- * @args: An array will be freed
- *
- * Return: void
- */
-
-void free_args_2(char **args)
-{
-    int i;
-
-    if (!args)
-        return;
-
-    for (i = 0; args[i + 2]; ++i)
-        free(args[i]);
-
-    free(args);
-}

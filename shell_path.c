@@ -3,7 +3,7 @@
 /**
 * _get_env - Gets the environment variable
 *
-* @env: Environment variable will be returned
+* @_env: Environment variable will be returned
 *
 * Return: The value of an environment variable
 */
@@ -12,9 +12,9 @@ char *_get_env(char *_env)
 {
 	char *s, *path;
 	int x, len;
+
 	if (_env == NULL)
 		return (NULL);
-
 	for (x = 0; environ[x]; x++)
 	{
 		len = _strlen(_env);
@@ -24,7 +24,7 @@ char *_get_env(char *_env)
 			path = strdup(environ[x] + len);
 			if (path)
 			{
-				if(s)
+				if (s)
 					free(s);
 				return (path);
 			}
@@ -41,27 +41,20 @@ char *_get_env(char *_env)
  *
  * @cmd: The command that user entered
  *
+ * @args: array of arguments
+ *
  * Return: 1 on success, 0 in failure
 */
 
 int path_handler(char *cmd, char **args)
 {
-
-	char* path, * cmd_path, * iter, /** tmp, */ch;
-	int x, len;
-	x = 0;
+	char *path, *cmd_path, *iter, ch;
+	int x = 0, len;
 
 	path = _get_env("PATH");
-	/*if (!tmp)
-		return (0);*/
-	/*path = strdup(tmp);*/
-	if (!path)
-		return (0);
-	/*free(tmp);*/
-
 	len = strlen(path);
 	iter = path;
-	while (x < len)
+	for (; x < len; x++)
 	{
 		if (iter[x] == '\0' || iter[x] == ':')
 		{
@@ -92,7 +85,6 @@ int path_handler(char *cmd, char **args)
 				x = 0;
 			}
 		}
-		x++;
 	}
 	free(path);
 	return (0);

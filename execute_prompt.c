@@ -17,8 +17,8 @@ void execute_promptcommand(char *cmd, char **args)
 
 	if (id == 0)
 	{
-		execve(cmd, args, environ);
-		exit(0);
+		if (execve(cmd, args, environ) == -1)
+			exit(2);
 	}
 	stat = 127;
 	wait(&stat);

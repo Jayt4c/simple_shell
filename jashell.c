@@ -7,17 +7,14 @@
 
 int main(void)
 {
-	/*char command[1024];*/
-	char *command = NULL;
-	char **cmd_args = NULL;
-	size_t x;
+	char *command = NULL, **cmd_args = NULL;
+	size_t x, count = 1, size;
 	int measure;
 
-	do
-	{
-		size_t size = 0;
+	do {
+		size = 0;
 		display_prompt();
-		measure = getline(&command, &size, stdin);	
+		measure = getline(&command, &size, stdin);
 		if (measure == -1)
 		{
 			free(command);
@@ -25,22 +22,8 @@ int main(void)
 		}
 		x = strlen(command);
 		command[x - 1] = '\0';
-		if (strlen(command) == 0)
-		{
-			free(command);
+		if (redirect(command))
 			continue;
-		}
-		if (strcmp(command, "exit") == 0)
-		{
-			free(command);
-			return (0);
-		}
-		if (_strcmp(command, "env") == 0)
-		{
-			lst_env();
-			free(command);
-			continue;
-		}
 		cmd_args = tokenize(command);
 		if (path_handler(cmd_args[0], cmd_args) == 0)
 		{
@@ -49,12 +32,8 @@ int main(void)
 			free(command);
 			continue;
 		}
-		else
-		{
 			free(cmd_args);
 			free(command);
-		}
 	} while (isatty(STDIN_FILENO) || measure != EOF);
-	
-	return (0);
+	return (count);
 }
