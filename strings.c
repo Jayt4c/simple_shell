@@ -3,9 +3,10 @@
 /**
  * _strncmp - compares 2 strings to a specific index
  *
- * s1: The first string to compare
+ * @s1: The first string to compare
  *
- * s2: The second string to compare
+ * @s2: The second string to compare
+ * @x: zize
  *
  * Return: 0 if they are equal, or the difference between them if
  * they're not
@@ -17,12 +18,15 @@ int _strncmp(char *s1, char *s2, size_t x)
 	size_t i;
 	int diff;
 
-	if (s1 == NULL || s2 == NULL || x == 0) {
+	if (s1 == NULL || s2 == NULL || x == 0)
+	{
 		return (-1);
 	}
-	for (i = 0; i < x; ++i) {
+	for (i = 0; i < x; ++i)
+	{
 		diff = (unsigned char)s1[i] - (unsigned char)s2[i];
-		if (diff != 0 || s1[i] == '\0' || s2[i] == '\0') {
+		if (diff != 0 || s1[i] == '\0' || s2[i] == '\0')
+		{
 			return (diff);
 		}
 	}
@@ -100,7 +104,7 @@ char *_strncpy(char *dest, char *src, int n)
  * Return: The difference between first two different chars
 */
 
-int _strcmp(const char *s1,const char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 	int cmp = 0;
 	int x = 0;
